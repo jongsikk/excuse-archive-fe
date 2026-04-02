@@ -1,93 +1,52 @@
 import { useState } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  ScrollView,
-  Pressable,
-  ActivityIndicator,
-  Alert,
-} from 'react-native';
+import { View, Text, TextInput, ScrollView, Pressable, ActivityIndicator, Alert } from 'react-native';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { router } from 'expo-router';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { apiClient } from '../../lib/api';
 import { getErrorMessage, MISTAKE_TYPE_LABELS, EMOTION_LABELS } from '@excuse-archive/shared';
 import type { CreateRecordRequest, MistakeType, Emotion } from '@excuse-archive/shared';
+import { useTheme } from '../../hooks/useTheme';
 
-const mistakeTypes: MistakeType[] = [
-  'PROCRASTINATION',
-  'TIME_MANAGEMENT',
-  'COMMUNICATION',
-  'FOCUS',
-  'EMOTIONAL',
-  'JUDGMENT',
-  'AVOIDANCE',
-  'OTHER',
-];
-
-const emotions: Emotion[] = [
-  'ANXIETY',
-  'GUILT',
-  'EMBARRASSMENT',
-  'RESTLESSNESS',
-  'HELPLESSNESS',
-  'ANGER',
-  'SADNESS',
-  'OTHER',
-];
+const mistakeTypes: MistakeType[] = ['PROCRASTINATION', 'TIME_MANAGEMENT', 'COMMUNICATION', 'FOCUS', 'EMOTIONAL', 'JUDGMENT', 'AVOIDANCE', 'OTHER'];
+const emotions: Emotion[] = ['ANXIETY', 'GUILT', 'EMBARRASSMENT', 'RESTLESSNESS', 'HELPLESSNESS', 'ANGER', 'SADNESS', 'OTHER'];
+const TOTAL_STEPS = 3;
 
 const STEPS = [
-  { label: '무슨 일이?', desc: '상황과 행동을 기록하세요' },
-  { label: '왜 그랬지?', desc: '원인과 감정을 분석하세요' },
-  { label: '다음엔?', desc: '개선 계획을 세우세요' },
+  { label: 'Crafting the\nNarrative', desc: 'Documenting social deviations with precision. Select your context and refine the delivery.' },
+  { label: 'Root\nAnalysis', desc: '왜 그렇게 행동했는지 원인과 감정을 분석하세요' },
+  { label: 'Forward\nPlanning', desc: '개선 계획을 세워 다음엔 더 나은 선택을 하세요' },
 ];
 
-const ACCENT = '#55D2C6';
+const STEP_LABELS = ['Context', 'Details', 'Review'];
 
-function StepIndicator({ current }: { current: number }) {
+function StepIndicator({ step }: { step: number }) {
+  const c = useTheme();
   return (
-    <View className="flex-row items-center mb-6">
-      {STEPS.map((step, i) => (
-        <View key={i} className="flex-row items-center flex-1">
-          <View className="items-center flex-1">
-            <View
-              style={{
-                width: 32,
-                height: 32,
-                borderRadius: 16,
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: i < current ? ACCENT : i === current ? '#55D2C620' : '#343C47',
-                borderWidth: 2,
-                borderColor: i <= current ? ACCENT : '#4B5563',
-              }}
-            >
-              <Text
-                style={{
-                  color: i < current ? '#202631' : i === current ? ACCENT : '#6B7280',
-                  fontSize: 13,
-                  fontWeight: '600',
-                }}
-              >
-                {i < current ? '✓' : String(i + 1)}
+    <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16 }}>
+      {STEP_LABELS.map((label, i) => (
+        <View key={i} style={{ flexDirection: 'row', alignItems: 'center', flex: i < 2 ? undefined : 0 }}>
+          <View style={{ alignItems: 'center', gap: 8 }}>
+            <View style={{
+              width: 40, height: 40, borderRadius: 12, alignItems: 'center', justifyContent: 'center',
+              backgroundColor: i === step ? '#cce8e4' : c.containerHigh,
+            }}>
+              <Text style={{
+                fontFamily: 'Manrope_700Bold', fontSize: 14, textAlign: 'center',
+                color: i === step ? '#3d5654' : c.textSecondary,
+              }}>
+                {i + 1}
               </Text>
             </View>
-            <Text
-              className="text-xs mt-1"
-              style={{ color: i === current ? ACCENT : '#6B7280' }}
-            >
-              {step.label}
+            <Text style={{
+              fontFamily: 'Manrope_700Bold', fontSize: 10, textTransform: 'uppercase', letterSpacing: 1,
+              color: i === step ? '#2e6863' : `rgba(88,96,104,${i < step ? 0.8 : 0.6})`,
+            }}>
+              {label}
             </Text>
           </View>
-          {i < STEPS.length - 1 && (
-            <View
-              className="mb-4"
-              style={{
-                flex: 1,
-                height: 2,
-                backgroundColor: i < current ? ACCENT : '#343C47',
-              }}
-            />
+          {i < 2 && (
+            <View style={{ flex: 1, height: 1, marginHorizontal: 16, marginBottom: 24, backgroundColor: i < step ? 'rgba(204,232,228,0.5)' : 'rgba(227,233,241,0.5)' }} />
           )}
         </View>
       ))}
@@ -95,324 +54,482 @@ function StepIndicator({ current }: { current: number }) {
   );
 }
 
-function Field({
-  label,
-  required,
-  placeholder,
-  value,
-  onChangeText,
-  error,
-  multiline = false,
-}: {
-  label: string;
-  required?: boolean;
-  placeholder: string;
-  value: string;
-  onChangeText: (v: string) => void;
-  error?: string;
-  multiline?: boolean;
-}) {
+function SectionLabel({ icon, label }: { icon: React.ComponentProps<typeof MaterialCommunityIcons>['name']; label: string }) {
+  const c = useTheme();
   return (
-    <View className="mb-4">
-      <Text className="text-sm font-medium text-gray-700 mb-1">
-        {label} {required && <Text className="text-red-500">*</Text>}
+    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 24 }}>
+      <MaterialCommunityIcons name={icon} size={20} color={c.textSecondary} />
+      <Text style={{ fontFamily: 'Manrope_700Bold', fontSize: 12, color: c.textSecondary, textTransform: 'uppercase', letterSpacing: 1.2 }}>
+        {label}
       </Text>
+    </View>
+  );
+}
+
+function Textarea({ placeholder, value, onChangeText, error }: {
+  placeholder: string; value: string; onChangeText: (v: string) => void; error?: string;
+}) {
+  const c = useTheme();
+  const [focused, setFocused] = useState(false);
+  return (
+    <View style={{ marginBottom: error ? 8 : 0 }}>
       <TextInput
         value={value}
         onChangeText={onChangeText}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
         placeholder={placeholder}
-        placeholderTextColor="#9CA3AF"
-        multiline={multiline}
-        numberOfLines={multiline ? 3 : 1}
-        className={`bg-white px-3 py-2.5 rounded-xl border ${
-          error ? 'border-red-400' : 'border-gray-200'
-        }`}
-        style={multiline ? { minHeight: 80, textAlignVertical: 'top' } : undefined}
+        placeholderTextColor="rgba(88,96,104,0.4)"
+        multiline
+        numberOfLines={4}
+        style={{
+          backgroundColor: c.section,
+          borderRadius: 8,
+          paddingHorizontal: 20,
+          paddingVertical: 20,
+          paddingBottom: 44,
+          color: c.textPrimary,
+          fontFamily: 'Manrope_400Regular',
+          fontSize: 16,
+          lineHeight: 24,
+          textAlignVertical: 'top',
+          minHeight: 120,
+          borderWidth: focused ? 1.5 : 0,
+          borderColor: '#2e6863' + '40',
+          shadowColor: '#000', shadowOffset: { width: 0, height: 1 },
+          shadowOpacity: 0.05, shadowRadius: 2, elevation: 1,
+        }}
       />
-      {error ? <Text className="text-red-500 text-xs mt-1">{error}</Text> : null}
+      {error && <Text style={{ fontFamily: 'Manrope_400Regular', color: c.error, fontSize: 11, marginTop: 4 }}>{error}</Text>}
+    </View>
+  );
+}
+
+function SingleLineInput({ placeholder, value, onChangeText, error }: {
+  placeholder: string; value: string; onChangeText: (v: string) => void; error?: string;
+}) {
+  const c = useTheme();
+  const [focused, setFocused] = useState(false);
+  return (
+    <View style={{ marginBottom: error ? 8 : 0 }}>
+      <TextInput
+        value={value}
+        onChangeText={onChangeText}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        placeholder={placeholder}
+        placeholderTextColor="rgba(88,96,104,0.4)"
+        style={{
+          backgroundColor: c.section,
+          borderRadius: 8,
+          paddingHorizontal: 20,
+          paddingVertical: 21,
+          color: c.textPrimary,
+          fontFamily: 'Manrope_400Regular',
+          fontSize: 16,
+          borderWidth: focused ? 1.5 : 0,
+          borderColor: '#2e6863' + '40',
+        }}
+      />
+      {error && <Text style={{ fontFamily: 'Manrope_400Regular', color: c.error, fontSize: 11, marginTop: 4 }}>{error}</Text>}
     </View>
   );
 }
 
 export default function RecordCreateScreen() {
+  const c = useTheme();
   const queryClient = useQueryClient();
   const [step, setStep] = useState(0);
 
   const [formData, setFormData] = useState<CreateRecordRequest>({
     occurredAt: new Date().toISOString(),
-    situation: '',
-    myAction: '',
-    result: '',
-    cause: '',
-    nextAction: '',
-    recurrenceTrigger: '',
-    recurrenceAction: '',
-    mistakeType: undefined,
-    emotion: undefined,
-    intensityLevel: 3,
+    situation: '', myAction: '', result: '', cause: '',
+    nextAction: '', recurrenceTrigger: '', recurrenceAction: '',
+    mistakeType: undefined, emotion: undefined, intensityLevel: 3,
   });
-
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const mutation = useMutation({
     mutationFn: (data: CreateRecordRequest) => apiClient.createRecord(data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['records'] });
-      router.back();
-    },
-    onError: (error) => {
-      Alert.alert('저장 실패', getErrorMessage(error));
-    },
+    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['records'] }); router.back(); },
+    onError: (error) => Alert.alert('저장 실패', getErrorMessage(error)),
   });
 
-  const updateField = (field: keyof CreateRecordRequest, value: string | number | undefined) => {
+  const update = (field: keyof CreateRecordRequest, value: string | number | undefined) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field as string]) setErrors((prev) => ({ ...prev, [field]: '' }));
   };
 
-  const validateStep = (s: number): boolean => {
-    const newErrors: Record<string, string> = {};
+  const validate = (s: number): boolean => {
+    const e: Record<string, string> = {};
     if (s === 0) {
-      if (!formData.situation.trim()) newErrors.situation = '상황을 입력해주세요';
-      if (!formData.myAction.trim()) newErrors.myAction = '내 행동을 입력해주세요';
-      if (!formData.result.trim()) newErrors.result = '결과를 입력해주세요';
+      if (!formData.situation.trim()) e.situation = '상황을 입력해주세요';
+      if (!formData.myAction.trim()) e.myAction = '내 대처를 입력해주세요';
+      if (!formData.result.trim()) e.result = '결과를 입력해주세요';
     } else if (s === 1) {
-      if (!formData.cause.trim()) newErrors.cause = '원인을 입력해주세요';
+      if (!formData.cause.trim()) e.cause = '원인을 입력해주세요';
     } else if (s === 2) {
-      if (!formData.nextAction.trim()) newErrors.nextAction = '다음 행동을 입력해주세요';
+      if (!formData.nextAction.trim()) e.nextAction = '다음 행동을 입력해주세요';
     }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    setErrors(e);
+    return Object.keys(e).length === 0;
   };
 
-  const handleNext = () => {
-    if (validateStep(step)) setStep((s) => s + 1);
-  };
-
-  const handleBack = () => {
-    if (step === 0) router.back();
-    else setStep((s) => s - 1);
-  };
-
-  const handleSubmit = () => {
-    if (!validateStep(2)) return;
-    mutation.mutate({
-      ...formData,
-      recurrenceTrigger: formData.recurrenceTrigger || undefined,
-      recurrenceAction: formData.recurrenceAction || undefined,
-    });
-  };
-
-  const intensityLabel = ['', '매우 약함', '약함', '보통', '강함', '매우 강함'];
   const intensityColor = ['', '#4ade80', '#4ade80', '#facc15', '#fb923c', '#f87171'];
 
   return (
-    <ScrollView className="flex-1 bg-gray-50" keyboardShouldPersistTaps="handled">
-      <View className="px-4 pt-4 pb-8">
-        {/* 헤더 */}
-        <View className="flex-row items-center gap-3 mb-5">
-          <Pressable onPress={handleBack} className="p-2">
-            <Text className="text-gray-500 text-lg">←</Text>
-          </Pressable>
-          <View>
-            <Text className="text-lg font-bold text-gray-900">새 기록</Text>
-            <Text className="text-xs text-gray-500">{STEPS[step].desc}</Text>
+    <View style={{ flex: 1, backgroundColor: c.bg }}>
+      {/* Header */}
+      <View style={{
+        height: 64, backgroundColor: c.bg,
+        flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
+        paddingHorizontal: 24,
+      }}>
+        <MaterialCommunityIcons name="menu" size={22} color={c.textPrimary} />
+        <Text style={{ fontFamily: 'Manrope_700Bold', fontSize: 16, color: '#2e6863', letterSpacing: 0.8, textTransform: 'uppercase' }}>
+          EXCUSE ARCHIVE
+        </Text>
+        <MaterialCommunityIcons name="magnify" size={22} color={c.textPrimary} />
+      </View>
+
+      <ScrollView
+        style={{ flex: 1 }}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 32, paddingBottom: 180 }}
+      >
+        {/* Editorial Header */}
+        <View style={{ marginBottom: 48, gap: 8 }}>
+          {/* NEW ENTRY label + divider */}
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 0, height: 24 }}>
+            <Text style={{ fontFamily: 'Manrope_700Bold', fontSize: 16, color: '#2e6863', textTransform: 'uppercase', letterSpacing: 0.8 }}>
+              New Entry
+            </Text>
+            <View style={{ flex: 1, height: 1, backgroundColor: 'rgba(171,179,188,0.2)', marginLeft: 16, alignSelf: 'center' }} />
           </View>
+
+          {/* Main heading */}
+          <Text style={{ fontFamily: 'Manrope_800ExtraBold', fontSize: 36, color: c.textPrimary, letterSpacing: -0.9, lineHeight: 40 }}>
+            {STEPS[step].label}
+          </Text>
+
+          {/* Description */}
+          <Text style={{ fontFamily: 'Manrope_400Regular', fontSize: 16, color: c.textSecondary, lineHeight: 26, fontWeight: '300' }}>
+            {STEPS[step].desc}
+          </Text>
         </View>
 
-        <StepIndicator current={step} />
+        {/* Step Indicator */}
+        <View style={{ marginBottom: 48 + 16 }}>
+          <StepIndicator step={step} />
+        </View>
 
-        {/* Step 1: 무슨 일이? */}
-        {step === 0 && (
-          <>
-            <Field
-              label="상황"
-              required
-              placeholder="어떤 상황이었나요?"
-              value={formData.situation}
-              onChangeText={(v) => updateField('situation', v)}
-              error={errors.situation}
-              multiline
-            />
-            <Field
-              label="내 행동"
-              required
-              placeholder="나는 어떻게 행동했나요?"
-              value={formData.myAction}
-              onChangeText={(v) => updateField('myAction', v)}
-              error={errors.myAction}
-              multiline
-            />
-            <Field
-              label="결과"
-              required
-              placeholder="어떤 결과가 있었나요?"
-              value={formData.result}
-              onChangeText={(v) => updateField('result', v)}
-              error={errors.result}
-              multiline
-            />
-          </>
-        )}
+        {/* Form Sections */}
+        <View style={{ gap: 48, paddingTop: 16 }}>
 
-        {/* Step 2: 왜 그랬지? */}
-        {step === 1 && (
-          <>
-            <Field
-              label="원인"
-              required
-              placeholder="왜 그렇게 행동했을까요?"
-              value={formData.cause}
-              onChangeText={(v) => updateField('cause', v)}
-              error={errors.cause}
-              multiline
-            />
+          {/* Step 1: Context */}
+          {step === 0 && (
+            <>
+              {/* The Situation */}
+              <View>
+                <SectionLabel icon="theater" label="The Situation" />
+                <Textarea
+                  placeholder={'What event are you currently avoiding?\nDescribe the social pressure point...'}
+                  value={formData.situation}
+                  onChangeText={(v) => update('situation', v)}
+                  error={errors.situation}
+                />
+              </View>
 
-            <View className="mb-4">
-              <Text className="text-sm text-gray-600 mb-2">실수 유형 (선택)</Text>
-              <View className="flex-row flex-wrap gap-2">
-                {mistakeTypes.map((type) => (
+              {/* Proposed Action */}
+              <View>
+                <SectionLabel icon="auto-fix" label="Proposed Action" />
+                <View style={{ gap: 16, marginBottom: 16 }}>
+                  {/* Card 1: Mental Health Day */}
                   <Pressable
-                    key={type}
-                    onPress={() => updateField('mistakeType', formData.mistakeType === type ? undefined : type)}
+                    onPress={() => update('myAction', formData.myAction === 'mental_health' ? '' : 'mental_health')}
                     style={{
-                      paddingHorizontal: 12,
-                      paddingVertical: 6,
-                      borderRadius: 20,
-                      borderWidth: 1,
-                      backgroundColor: formData.mistakeType === type ? '#55D2C620' : 'white',
-                      borderColor: formData.mistakeType === type ? ACCENT : '#E5E7EB',
+                      backgroundColor: '#ffffff',
+                      borderRadius: 8, padding: 20,
+                      flexDirection: 'row', alignItems: 'center', gap: 16,
+                      shadowColor: '#000', shadowOffset: { width: 0, height: 8 },
+                      shadowOpacity: 0.04, shadowRadius: 30, elevation: 2,
+                      borderWidth: formData.myAction === 'mental_health' ? 1 : 0,
+                      borderColor: 'rgba(46,104,99,0.2)',
                     }}
                   >
-                    <Text style={{ color: formData.mistakeType === type ? ACCENT : '#374151', fontSize: 13 }}>
-                      {MISTAKE_TYPE_LABELS[type]}
-                    </Text>
+                    <View style={{ width: 40, height: 40, borderRadius: 12, backgroundColor: 'rgba(204,232,228,0.3)', alignItems: 'center', justifyContent: 'center' }}>
+                      <MaterialCommunityIcons name="heart-pulse" size={18} color="#2e6863" />
+                    </View>
+                    <View style={{ flex: 1 }}>
+                      <Text style={{ fontFamily: 'Manrope_700Bold', fontSize: 14, color: c.textPrimary }}>{`The 'Mental Health' Day`}</Text>
+                      <Text style={{ fontFamily: 'Manrope_400Regular', fontSize: 12, color: c.textSecondary }}>Gentle, undeniable, modern.</Text>
+                    </View>
                   </Pressable>
-                ))}
-              </View>
-            </View>
 
-            <View className="mb-4">
-              <Text className="text-sm text-gray-600 mb-2">감정 (선택)</Text>
-              <View className="flex-row flex-wrap gap-2">
-                {emotions.map((emotion) => (
+                  {/* Card 2: Urgent Matter */}
                   <Pressable
-                    key={emotion}
-                    onPress={() => updateField('emotion', formData.emotion === emotion ? undefined : emotion)}
+                    onPress={() => update('myAction', formData.myAction === 'urgent_matter' ? '' : 'urgent_matter')}
                     style={{
-                      paddingHorizontal: 12,
-                      paddingVertical: 6,
-                      borderRadius: 20,
-                      borderWidth: 1,
-                      backgroundColor: formData.emotion === emotion ? '#A855F720' : 'white',
-                      borderColor: formData.emotion === emotion ? '#A855F7' : '#E5E7EB',
+                      backgroundColor: '#ffffff',
+                      borderRadius: 8, padding: 20,
+                      flexDirection: 'row', alignItems: 'center', gap: 16,
+                      shadowColor: '#000', shadowOffset: { width: 0, height: 8 },
+                      shadowOpacity: 0.04, shadowRadius: 30, elevation: 2,
+                      borderWidth: formData.myAction === 'urgent_matter' ? 1 : 0,
+                      borderColor: 'rgba(46,104,99,0.2)',
                     }}
                   >
-                    <Text style={{ color: formData.emotion === emotion ? '#A855F7' : '#374151', fontSize: 13 }}>
-                      {EMOTION_LABELS[emotion]}
-                    </Text>
+                    <View style={{ width: 40, height: 40, borderRadius: 12, backgroundColor: '#b3eee7', alignItems: 'center', justifyContent: 'center' }}>
+                      <MaterialCommunityIcons name="lightning-bolt" size={16} color="#2e6863" />
+                    </View>
+                    <View style={{ flex: 1 }}>
+                      <Text style={{ fontFamily: 'Manrope_700Bold', fontSize: 14, color: c.textPrimary }}>{`The 'Urgent Matter'`}</Text>
+                      <Text style={{ fontFamily: 'Manrope_400Regular', fontSize: 12, color: c.textSecondary }}>Vague but implies high stakes.</Text>
+                    </View>
                   </Pressable>
-                ))}
-              </View>
-            </View>
+                </View>
 
-            <View className="mb-4">
-              <View className="flex-row justify-between items-center mb-2">
-                <Text className="text-sm text-gray-600">강도 (선택)</Text>
-                <Text style={{ color: intensityColor[formData.intensityLevel ?? 3], fontWeight: '600', fontSize: 13 }}>
-                  {formData.intensityLevel} — {intensityLabel[formData.intensityLevel ?? 3]}
+                {/* Custom input */}
+                <SingleLineInput
+                  placeholder="Or define a custom response protocol..."
+                  value={['mental_health', 'urgent_matter'].includes(formData.myAction) ? '' : formData.myAction}
+                  onChangeText={(v) => update('myAction', v)}
+                  error={errors.myAction}
+                />
+              </View>
+
+              {/* Anticipated Result */}
+              <View>
+                <SectionLabel icon="chart-line" label="Anticipated Result" />
+                <View style={{ backgroundColor: c.section, borderRadius: 16, padding: 0, overflow: 'hidden' }}>
+                  <View style={{ padding: 24, paddingBottom: 0 }}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+                      <Text style={{ fontFamily: 'Manrope_500Medium', fontSize: 14, color: c.textSecondary }}>Projected Success Rate</Text>
+                      <Text style={{ fontFamily: 'Manrope_700Bold', fontSize: 14, color: '#2e6863' }}>84%</Text>
+                    </View>
+                    {/* Progress bar */}
+                    <View style={{ height: 8, backgroundColor: c.containerHigh, borderRadius: 12, overflow: 'hidden', marginBottom: 16 }}>
+                      <View style={{ height: '100%', width: '84%', backgroundColor: '#2e6863', borderRadius: 12 }} />
+                    </View>
+                  </View>
+                  <View style={{ paddingHorizontal: 24, paddingBottom: 24 }}>
+                    <Text style={{ fontFamily: 'Manrope_400Regular', fontSize: 12, color: c.textSecondary, lineHeight: 19.5 }}>
+                      "Based on historical data for this audience, a vague urgent matter yields minimal follow-up questions."
+                    </Text>
+                  </View>
+                </View>
+              </View>
+
+              {/* Result field */}
+              <View>
+                <SectionLabel icon="flag-outline" label="Actual Result" />
+                <Textarea
+                  placeholder="최종적으로 어떤 결과가 나왔나요?"
+                  value={formData.result}
+                  onChangeText={(v) => update('result', v)}
+                  error={errors.result}
+                />
+              </View>
+
+              {/* Decorative card */}
+              <View style={{ backgroundColor: '#2e6863', borderRadius: 24, padding: 32, overflow: 'hidden' }}>
+                <Text style={{ fontFamily: 'Manrope_700Bold', fontSize: 18, color: '#b3eee7', marginBottom: 4 }}>
+                  Archival Wisdom
+                </Text>
+                <Text style={{ fontFamily: 'Manrope_400Regular', fontSize: 14, color: 'rgba(255,255,255,0.8)', lineHeight: 20 }}>
+                  The best excuse is the one that allows both parties to maintain their dignity.
                 </Text>
               </View>
-              <View className="flex-row justify-between">
-                {[1, 2, 3, 4, 5].map((v) => (
-                  <Pressable
-                    key={v}
-                    onPress={() => updateField('intensityLevel', v)}
-                    style={{
-                      width: 44,
-                      height: 44,
-                      borderRadius: 22,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      backgroundColor: formData.intensityLevel === v ? intensityColor[v] + '30' : '#F3F4F6',
-                      borderWidth: 2,
-                      borderColor: formData.intensityLevel === v ? intensityColor[v] : 'transparent',
-                    }}
-                  >
-                    <Text style={{ color: intensityColor[v], fontWeight: '700' }}>{v}</Text>
-                  </Pressable>
-                ))}
+            </>
+          )}
+
+          {/* Step 2: Details */}
+          {step === 1 && (
+            <>
+              <View>
+                <SectionLabel icon="magnify" label="Root Cause" />
+                <Textarea
+                  placeholder="왜 그렇게 행동했을까요?"
+                  value={formData.cause}
+                  onChangeText={(v) => update('cause', v)}
+                  error={errors.cause}
+                />
               </View>
-            </View>
-          </>
-        )}
 
-        {/* Step 3: 다음엔? */}
-        {step === 2 && (
-          <>
-            <View className="bg-blue-50 border border-blue-100 rounded-xl p-3 mb-4">
-              <Text className="text-blue-600 text-xs">
-                💡 칭찬/성과/요약 금지. '실수/후회'만 기록합니다.
-              </Text>
-            </View>
+              {/* Mistake Type */}
+              <View>
+                <Text style={{ fontFamily: 'Manrope_700Bold', fontSize: 12, color: c.textSecondary, textTransform: 'uppercase', letterSpacing: 1.2, marginBottom: 16 }}>
+                  실수 유형 (선택)
+                </Text>
+                <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
+                  {mistakeTypes.map((type) => {
+                    const active = formData.mistakeType === type;
+                    return (
+                      <Pressable
+                        key={type}
+                        onPress={() => update('mistakeType', active ? undefined : type)}
+                        style={{ paddingHorizontal: 14, paddingVertical: 7, borderRadius: 9999, backgroundColor: active ? '#cce8e4' : c.section }}
+                      >
+                        <Text style={{ fontFamily: 'Manrope_400Regular', color: active ? '#2e6863' : c.textSecondary, fontSize: 13 }}>
+                          {MISTAKE_TYPE_LABELS[type]}
+                        </Text>
+                      </Pressable>
+                    );
+                  })}
+                </View>
+              </View>
 
-            <Field
-              label="다음 행동"
-              required
-              placeholder="다음에는 어떻게 할 건가요? (내가 통제할 수 있는 행동)"
-              value={formData.nextAction}
-              onChangeText={(v) => updateField('nextAction', v)}
-              error={errors.nextAction}
-              multiline
-            />
-            <Field
-              label="재발 트리거 (선택)"
-              placeholder="예: 회의 직후, 오전 업무 시작"
-              value={formData.recurrenceTrigger ?? ''}
-              onChangeText={(v) => updateField('recurrenceTrigger', v)}
-            />
-            <Field
-              label="재발 방지 행동 (선택)"
-              placeholder="예: 타이머 10분 + 미처리 건 1개만"
-              value={formData.recurrenceAction ?? ''}
-              onChangeText={(v) => updateField('recurrenceAction', v)}
-            />
-          </>
-        )}
+              {/* Emotion */}
+              <View>
+                <Text style={{ fontFamily: 'Manrope_700Bold', fontSize: 12, color: c.textSecondary, textTransform: 'uppercase', letterSpacing: 1.2, marginBottom: 16 }}>
+                  감정 (선택)
+                </Text>
+                <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
+                  {emotions.map((emotion) => {
+                    const active = formData.emotion === emotion;
+                    return (
+                      <Pressable
+                        key={emotion}
+                        onPress={() => update('emotion', active ? undefined : emotion)}
+                        style={{ paddingHorizontal: 14, paddingVertical: 7, borderRadius: 9999, backgroundColor: active ? '#cce8e4' : c.section }}
+                      >
+                        <Text style={{ fontFamily: 'Manrope_400Regular', color: active ? '#2e6863' : c.textSecondary, fontSize: 13 }}>
+                          {EMOTION_LABELS[emotion]}
+                        </Text>
+                      </Pressable>
+                    );
+                  })}
+                </View>
+              </View>
 
-        {/* 하단 버튼 */}
-        <View className="flex-row gap-3 mt-4">
+              {/* Intensity */}
+              <View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                  <Text style={{ fontFamily: 'Manrope_700Bold', fontSize: 12, color: c.textSecondary, textTransform: 'uppercase', letterSpacing: 1.2 }}>
+                    강도 (선택)
+                  </Text>
+                  <Text style={{ fontFamily: 'Manrope_500Medium', color: intensityColor[formData.intensityLevel ?? 3], fontSize: 12 }}>
+                    {formData.intensityLevel} / 5
+                  </Text>
+                </View>
+                <View style={{ flexDirection: 'row', gap: 8 }}>
+                  {[1, 2, 3, 4, 5].map((v) => (
+                    <Pressable
+                      key={v}
+                      onPress={() => update('intensityLevel', v)}
+                      style={{
+                        flex: 1, height: 44, borderRadius: 12, alignItems: 'center', justifyContent: 'center',
+                        backgroundColor: formData.intensityLevel === v ? intensityColor[v] + '25' : c.section,
+                        borderWidth: formData.intensityLevel === v ? 1.5 : 0,
+                        borderColor: intensityColor[v],
+                      }}
+                    >
+                      <Text style={{ fontFamily: 'Manrope_700Bold', color: intensityColor[v], fontSize: 15 }}>{v}</Text>
+                    </Pressable>
+                  ))}
+                </View>
+              </View>
+            </>
+          )}
+
+          {/* Step 3: Review */}
+          {step === 2 && (
+            <>
+              <View>
+                <SectionLabel icon="arrow-right-circle-outline" label="Next Action" />
+                <Textarea
+                  placeholder="다음에는 어떻게 할 건가요?"
+                  value={formData.nextAction}
+                  onChangeText={(v) => update('nextAction', v)}
+                  error={errors.nextAction}
+                />
+              </View>
+              <View>
+                <SectionLabel icon="lightning-bolt-outline" label="Recurrence Trigger" />
+                <SingleLineInput
+                  placeholder="예: 회의 직후, 오전 업무 시작"
+                  value={formData.recurrenceTrigger ?? ''}
+                  onChangeText={(v) => update('recurrenceTrigger', v)}
+                />
+              </View>
+              <View>
+                <SectionLabel icon="shield-check-outline" label="Prevention Strategy" />
+                <SingleLineInput
+                  placeholder="예: 타이머 10분 설정"
+                  value={formData.recurrenceAction ?? ''}
+                  onChangeText={(v) => update('recurrenceAction', v)}
+                />
+              </View>
+            </>
+          )}
+        </View>
+      </ScrollView>
+
+      {/* Footer Action Bar */}
+      <View style={{
+        position: 'absolute', bottom: 80, left: 0, right: 0, paddingHorizontal: 24,
+      }}>
+        <View style={{
+          backgroundColor: 'rgba(255,255,255,0.9)',
+          borderRadius: 16, padding: 17,
+          flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
+          borderWidth: 1, borderColor: 'rgba(171,179,188,0.1)',
+          shadowColor: '#000', shadowOffset: { width: 0, height: 20 },
+          shadowOpacity: 0.1, shadowRadius: 25, elevation: 8,
+        }}>
+          {/* Cancel / Back */}
           <Pressable
-            onPress={handleBack}
-            className="flex-1 py-4 rounded-xl bg-gray-100 items-center"
+            onPress={() => { if (step === 0) router.back(); else setStep((s) => s - 1); }}
+            style={{ borderRadius: 12, paddingHorizontal: 24, paddingVertical: 12 }}
           >
-            <Text className="text-gray-600 font-medium">{step === 0 ? '취소' : '이전'}</Text>
+            <Text style={{ fontFamily: 'Manrope_700Bold', fontSize: 14, color: c.textSecondary, textAlign: 'center' }}>
+              {step === 0 ? 'Cancel' : 'Back'}
+            </Text>
           </Pressable>
 
+          {/* Continue / Save */}
           {step < 2 ? (
             <Pressable
-              onPress={handleNext}
-              className="flex-1 py-4 rounded-xl items-center"
-              style={{ backgroundColor: ACCENT + '20', borderWidth: 1, borderColor: ACCENT }}
+              onPress={() => { if (validate(step)) setStep((s) => s + 1); }}
+              style={{
+                backgroundColor: '#2e6863', borderRadius: 12,
+                paddingHorizontal: 32, paddingVertical: 12,
+                flexDirection: 'row', alignItems: 'center', gap: 8,
+                shadowColor: '#2e6863', shadowOffset: { width: 0, height: 10 },
+                shadowOpacity: 0.2, shadowRadius: 15, elevation: 4,
+              }}
             >
-              <Text style={{ color: ACCENT, fontWeight: '600' }}>다음 →</Text>
+              <Text style={{ fontFamily: 'Manrope_700Bold', fontSize: 14, color: '#e1fffb', textAlign: 'center' }}>Continue</Text>
+              <MaterialCommunityIcons name="chevron-right" size={14} color="#e1fffb" />
             </Pressable>
           ) : (
             <Pressable
-              onPress={handleSubmit}
+              onPress={() => {
+                if (!validate(2)) return;
+                mutation.mutate({
+                  ...formData,
+                  recurrenceTrigger: formData.recurrenceTrigger || undefined,
+                  recurrenceAction: formData.recurrenceAction || undefined,
+                });
+              }}
               disabled={mutation.isPending}
-              className="flex-1 py-4 rounded-xl items-center"
-              style={{ backgroundColor: mutation.isPending ? '#D1D5DB' : ACCENT }}
+              style={{
+                backgroundColor: '#2e6863', borderRadius: 12,
+                paddingHorizontal: 32, paddingVertical: 12,
+                shadowColor: '#2e6863', shadowOffset: { width: 0, height: 10 },
+                shadowOpacity: 0.2, shadowRadius: 15, elevation: 4,
+              }}
             >
               {mutation.isPending ? (
-                <ActivityIndicator color="white" size="small" />
+                <ActivityIndicator color="#ffffff" size="small" />
               ) : (
-                <Text className="text-white font-semibold">저장하기</Text>
+                <Text style={{ fontFamily: 'Manrope_700Bold', fontSize: 14, color: '#e1fffb', textAlign: 'center' }}>Save to Archive</Text>
               )}
             </Pressable>
           )}
         </View>
       </View>
-    </ScrollView>
+    </View>
   );
 }

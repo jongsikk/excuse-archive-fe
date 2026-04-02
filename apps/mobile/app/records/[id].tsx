@@ -1,10 +1,26 @@
 import { View, Text, ScrollView, Pressable, ActivityIndicator, Alert } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, router } from 'expo-router';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiClient } from '../../lib/api';
 import { MISTAKE_TYPE_LABELS, EMOTION_LABELS } from '@excuse-archive/shared';
+import { useTheme } from '../../hooks/useTheme';
+
+function InfoSection({ label, value }: { label: string; value?: string }) {
+  const c = useTheme();
+  if (!value) return null;
+  return (
+    <View style={{ marginBottom: 20 }}>
+      <Text style={{ fontFamily: 'Manrope_500Medium', fontSize: 11, color: c.textMuted, marginBottom: 6, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+        {label}
+      </Text>
+      <Text style={{ fontFamily: 'Manrope_400Regular', color: c.textPrimary, fontSize: 15, lineHeight: 22 }}>{value}</Text>
+    </View>
+  );
+}
 
 export default function RecordDetailScreen() {
+  const c = useTheme();
   const { id } = useLocalSearchParams<{ id: string }>();
   const queryClient = useQueryClient();
 
@@ -31,136 +47,123 @@ export default function RecordDetailScreen() {
   });
 
   const handleDelete = () => {
-    Alert.alert('기록 삭제', '이 기록을 삭제하시겠습니까?\n삭제된 기록은 복구할 수 없습니다.', [
+    Alert.alert('기록 삭제', '삭제된 기록은 복구할 수 없습니다.', [
       { text: '취소', style: 'cancel' },
-      {
-        text: '삭제',
-        style: 'destructive',
-        onPress: () => deleteMutation.mutate(),
-      },
+      { text: '삭제', style: 'destructive', onPress: () => deleteMutation.mutate() },
     ]);
   };
 
   if (isLoading) {
     return (
-      <View className="flex-1 items-center justify-center bg-gray-50">
-        <ActivityIndicator color="#0ea5e9" />
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: c.bg }}>
+        <ActivityIndicator color={c.accent} />
       </View>
     );
   }
 
   if (!record) {
     return (
-      <View className="flex-1 items-center justify-center bg-gray-50">
-        <Text className="text-gray-500">기록을 찾을 수 없습니다</Text>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: c.bg }}>
+        <Text style={{ fontFamily: 'Manrope_400Regular', color: c.textMuted }}>기록을 찾을 수 없습니다</Text>
       </View>
     );
   }
 
+  const intensityColor = ['', '#4ade80', '#4ade80', '#facc15', '#fb923c', '#f87171'];
+
   return (
-    <ScrollView className="flex-1 bg-gray-50">
-      <View className="m-4 bg-white rounded-xl border border-gray-200 overflow-hidden">
-        {/* 메타 정보 */}
-        <View className="px-4 py-3 bg-gray-50 border-b border-gray-100">
-          <View className="flex-row flex-wrap gap-2">
-            {record.mistakeType && (
-              <View className="px-2 py-1 bg-blue-100 rounded">
-                <Text className="text-blue-700 text-xs">
-                  {MISTAKE_TYPE_LABELS[record.mistakeType]}
-                </Text>
-              </View>
-            )}
-            {record.emotion && (
-              <View className="px-2 py-1 bg-purple-100 rounded">
-                <Text className="text-purple-700 text-xs">{EMOTION_LABELS[record.emotion]}</Text>
-              </View>
-            )}
-            {record.intensityLevel && (
-              <View className="px-2 py-1 bg-gray-100 rounded">
-                <Text className="text-gray-700 text-xs">강도 {record.intensityLevel}/5</Text>
-              </View>
-            )}
+    <ScrollView style={{ flex: 1, backgroundColor: c.bg }} showsVerticalScrollIndicator={false}>
+      <View style={{ paddingHorizontal: 20, paddingTop: 16, paddingBottom: 40 }}>
+
+        {/* 메타 태그 */}
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 20 }}>
+          {record.mistakeType && (
+            <View style={{ paddingHorizontal: 12, paddingVertical: 5, backgroundColor: c.accentMuted, borderRadius: 9999 }}>
+              <Text style={{ fontFamily: 'Manrope_500Medium', color: c.accent, fontSize: 12 }}>
+                {MISTAKE_TYPE_LABELS[record.mistakeType]}
+              </Text>
+            </View>
+          )}
+          {record.emotion && (
+            <View style={{ paddingHorizontal: 12, paddingVertical: 5, backgroundColor: '#A855F718', borderRadius: 9999 }}>
+              <Text style={{ fontFamily: 'Manrope_500Medium', color: '#A855F7', fontSize: 12 }}>{EMOTION_LABELS[record.emotion]}</Text>
+            </View>
+          )}
+          {record.intensityLevel && (
+            <View style={{ paddingHorizontal: 12, paddingVertical: 5, backgroundColor: intensityColor[record.intensityLevel] + '20', borderRadius: 9999 }}>
+              <Text style={{ fontFamily: 'Manrope_500Medium', color: intensityColor[record.intensityLevel], fontSize: 12 }}>강도 {record.intensityLevel}/5</Text>
+            </View>
+          )}
+          <View style={{ paddingHorizontal: 12, paddingVertical: 5, backgroundColor: c.section, borderRadius: 9999 }}>
+            <Text style={{ fontFamily: 'Manrope_400Regular', color: c.textMuted, fontSize: 12 }}>
+              {new Date(record.occurredAt).toLocaleDateString('ko-KR', { month: 'long', day: 'numeric' })}
+            </Text>
           </View>
-          <Text className="text-sm text-gray-500 mt-2">
-            {new Date(record.occurredAt).toLocaleDateString('ko-KR', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-            })}
-          </Text>
         </View>
 
         {/* 본문 */}
-        <View className="p-4">
-          <View className="mb-4">
-            <Text className="text-sm font-medium text-gray-500 mb-1">상황</Text>
-            <Text className="text-gray-900">{record.situation}</Text>
-          </View>
-
-          <View className="mb-4">
-            <Text className="text-sm font-medium text-gray-500 mb-1">내 행동</Text>
-            <Text className="text-gray-900">{record.myAction}</Text>
-          </View>
-
-          <View className="mb-4">
-            <Text className="text-sm font-medium text-gray-500 mb-1">결과</Text>
-            <Text className="text-gray-900">{record.result}</Text>
-          </View>
-
-          <View className="mb-4">
-            <Text className="text-sm font-medium text-gray-500 mb-1">원인</Text>
-            <Text className="text-gray-900">{record.cause}</Text>
-          </View>
-
-          {/* 다음 행동 */}
-          <View className="bg-blue-50 -mx-4 px-4 py-4 mt-2">
-            <View className="flex-row justify-between items-start">
-              <View className="flex-1 mr-4">
-                <Text className="text-sm font-medium text-blue-700 mb-1">다음 행동</Text>
-                <Text className="text-gray-900">{record.nextAction}</Text>
-              </View>
-              <Pressable
-                onPress={() => toggleMutation.mutate(!record.nextActionDone)}
-                disabled={toggleMutation.isPending}
-                className={`px-4 py-2 rounded-lg ${
-                  record.nextActionDone ? 'bg-green-600' : 'bg-white border border-gray-300'
-                }`}
-              >
-                <Text className={record.nextActionDone ? 'text-white' : 'text-gray-700'}>
-                  {record.nextActionDone ? '완료됨 ✓' : '완료하기'}
-                </Text>
-              </Pressable>
-            </View>
-          </View>
-
-          {/* 재발 방지 */}
-          {(record.recurrenceTrigger || record.recurrenceAction) && (
-            <View className="mt-4 pt-4 border-t border-gray-100">
-              <Text className="text-sm font-medium text-gray-500 mb-2">재발 방지</Text>
-              {record.recurrenceTrigger && (
-                <Text className="text-sm text-gray-700 mb-1">
-                  <Text className="text-gray-500">트리거: </Text>
-                  {record.recurrenceTrigger}
-                </Text>
-              )}
-              {record.recurrenceAction && (
-                <Text className="text-sm text-gray-700">
-                  <Text className="text-gray-500">방지 행동: </Text>
-                  {record.recurrenceAction}
-                </Text>
-              )}
-            </View>
-          )}
+        <View style={{ backgroundColor: c.card, borderRadius: 24, padding: 24, marginBottom: 12, ...c.shadowMd }}>
+          <InfoSection label="Situation (상황)" value={record.situation} />
+          <InfoSection label="Action (행동)" value={record.myAction} />
+          <InfoSection label="Result (결과)" value={record.result} />
+          <InfoSection label="Cause (원인)" value={record.cause} />
         </View>
-      </View>
 
-      {/* 삭제 버튼 */}
-      <View className="px-4 mb-8">
-        <Pressable onPress={handleDelete} className="py-3">
-          <Text className="text-red-600 text-center">기록 삭제</Text>
+        {/* 다음 행동 */}
+        <View style={{ backgroundColor: c.card, borderRadius: 24, padding: 24, marginBottom: 12, ...c.shadowMd }}>
+          <Text style={{ fontFamily: 'Manrope_500Medium', fontSize: 11, color: c.textMuted, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+            Next Action
+          </Text>
+          <Text style={{ fontFamily: 'Manrope_400Regular', color: c.textPrimary, fontSize: 15, lineHeight: 22, marginBottom: 16 }}>
+            {record.nextAction}
+          </Text>
+          <Pressable
+            onPress={() => toggleMutation.mutate(!record.nextActionDone)}
+            disabled={toggleMutation.isPending}
+          >
+            {record.nextActionDone ? (
+              <View style={{ backgroundColor: c.accentMuted, borderRadius: 9999, paddingVertical: 14, alignItems: 'center' }}>
+                <Text style={{ fontFamily: 'Manrope_700Bold', color: c.accent, fontSize: 14 }}>완료됨 ✓</Text>
+              </View>
+            ) : (
+              <LinearGradient
+                colors={[c.gradientStart, c.gradientEnd]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                style={{ borderRadius: 9999, paddingVertical: 14, alignItems: 'center' }}
+              >
+                <Text style={{ fontFamily: 'Manrope_700Bold', color: '#ffffff', fontSize: 14 }}>완료하기</Text>
+              </LinearGradient>
+            )}
+          </Pressable>
+        </View>
+
+        {/* 재발 방지 */}
+        {(record.recurrenceTrigger || record.recurrenceAction) && (
+          <View style={{ backgroundColor: c.card, borderRadius: 24, padding: 24, marginBottom: 12, ...c.shadowMd }}>
+            <Text style={{ fontFamily: 'Manrope_500Medium', fontSize: 11, color: c.textMuted, marginBottom: 12, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+              재발 방지
+            </Text>
+            {record.recurrenceTrigger && (
+              <View style={{ marginBottom: 10 }}>
+                <Text style={{ fontFamily: 'Manrope_400Regular', fontSize: 11, color: c.textMuted, marginBottom: 3 }}>트리거</Text>
+                <Text style={{ fontFamily: 'Manrope_400Regular', fontSize: 14, color: c.textSecondary }}>{record.recurrenceTrigger}</Text>
+              </View>
+            )}
+            {record.recurrenceAction && (
+              <View>
+                <Text style={{ fontFamily: 'Manrope_400Regular', fontSize: 11, color: c.textMuted, marginBottom: 3 }}>방지 행동</Text>
+                <Text style={{ fontFamily: 'Manrope_400Regular', fontSize: 14, color: c.textSecondary }}>{record.recurrenceAction}</Text>
+              </View>
+            )}
+          </View>
+        )}
+
+        {/* 삭제 */}
+        <Pressable onPress={handleDelete} style={{ paddingVertical: 16, alignItems: 'center' }}>
+          <Text style={{ fontFamily: 'Manrope_400Regular', color: '#f87171', fontSize: 14 }}>기록 삭제</Text>
         </Pressable>
+
       </View>
     </ScrollView>
   );

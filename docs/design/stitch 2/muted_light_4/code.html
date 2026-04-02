@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Excuse Archive - My Records</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#76AFA9",
+                        "primary-hover": "#659691",
+                        "on-primary": "#ffffff",
+                        "surface": "#f7f9fe",
+                        "surface-variant": "#ffffff",
+                        "on-surface": "#2e6863",
+                        "outline": "#e0e4e8"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope", "Public Sans", "sans-serif"],
+                        "body": ["Public Sans", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f7f9fe;
+            font-family: 'Public Sans', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-slate-800 antialiased min-h-screen flex flex-col pb-32">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-6 h-16 bg-[#f7f9fe] dark:bg-slate-950 sticky top-0 z-50 tonal-shift-no-border flat-no-shadows">
+<div class="flex items-center gap-4">
+<button class="text-[#2e6863] dark:text-[#76AFA9] hover:opacity-80 transition-opacity duration-300">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="Manrope display-sm uppercase tracking-[0.05em] font-bold text-[#2e6863] dark:text-[#76AFA9] text-lg">EXCUSE ARCHIVE</h1>
+</div>
+<button class="text-[#2e6863] dark:text-[#76AFA9] hover:opacity-80 transition-opacity duration-300">
+<span class="material-symbols-outlined">search</span>
+</button>
+</header>
+<main class="flex-1 w-full max-w-5xl mx-auto px-6 py-8">
+<!-- Hero Section / Title -->
+<div class="mb-10">
+<h2 class="text-3xl font-extrabold font-headline tracking-tight text-[#2e6863] mb-2">My Records</h2>
+<p class="text-slate-500 font-body">Manage and review your submitted excuse documentation.</p>
+</div>
+<!-- Filter Tabs -->
+<div class="flex items-center gap-2 mb-8 bg-white/50 p-1.5 rounded-2xl w-fit">
+<button class="px-8 py-2.5 rounded-xl font-label font-bold text-sm bg-[#76AFA9] text-white shadow-sm transition-all">All</button>
+<button class="px-8 py-2.5 rounded-xl font-label font-bold text-sm text-slate-500 hover:bg-slate-100 transition-all">Pending</button>
+</div>
+<!-- Records Grid (List View) -->
+<div class="grid grid-cols-1 gap-4">
+<!-- Record Card 1 -->
+<div class="bg-white rounded-3xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:shadow-xl hover:shadow-slate-200/50 transition-all border border-slate-100">
+<div class="flex items-center gap-6">
+<div class="w-16 h-16 rounded-2xl bg-[#f0f7f6] flex items-center justify-center text-[#76AFA9]">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+</div>
+<div>
+<div class="flex items-center gap-3 mb-1">
+<span class="text-[10px] uppercase tracking-widest font-black text-slate-400">#REC-9082</span>
+<span class="px-2 py-0.5 rounded-md bg-[#eef8f7] text-[#76AFA9] text-[10px] font-bold uppercase">Medical</span>
+</div>
+<h3 class="text-lg font-bold text-slate-800">Sudden Allergies Documentation</h3>
+<p class="text-sm text-slate-500">Submitted on Oct 12, 2023</p>
+</div>
+</div>
+<div class="flex items-center gap-6 w-full md:w-auto justify-between md:justify-end">
+<div class="flex flex-col items-end">
+<span class="text-xs font-bold text-slate-400 uppercase mb-1">Status</span>
+<div class="flex items-center gap-2 text-[#76AFA9]">
+<span class="material-symbols-outlined text-lg">check_circle</span>
+<span class="font-bold text-sm uppercase">Completed</span>
+</div>
+</div>
+<button class="p-3 rounded-2xl bg-slate-50 text-slate-400 hover:text-[#76AFA9] hover:bg-[#76AFA9]/10 transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Record Card 2 -->
+<div class="bg-white rounded-3xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:shadow-xl hover:shadow-slate-200/50 transition-all border border-slate-100">
+<div class="flex items-center gap-6">
+<div class="w-16 h-16 rounded-2xl bg-[#f0f7f6] flex items-center justify-center text-[#76AFA9]">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">history_edu</span>
+</div>
+<div>
+<div class="flex items-center gap-3 mb-1">
+<span class="text-[10px] uppercase tracking-widest font-black text-slate-400">#REC-8841</span>
+<span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-500 text-[10px] font-bold uppercase">Transit</span>
+</div>
+<h3 class="text-lg font-bold text-slate-800">Unexpected Infrastructure Failure</h3>
+<p class="text-sm text-slate-500">Submitted on Oct 09, 2023</p>
+</div>
+</div>
+<div class="flex items-center gap-6 w-full md:w-auto justify-between md:justify-end">
+<div class="flex flex-col items-end">
+<span class="text-xs font-bold text-slate-400 uppercase mb-1">Status</span>
+<div class="flex items-center gap-2 text-amber-500">
+<span class="material-symbols-outlined text-lg">pending</span>
+<span class="font-bold text-sm uppercase">Pending</span>
+</div>
+</div>
+<button class="p-3 rounded-2xl bg-slate-50 text-slate-400 hover:text-[#76AFA9] hover:bg-[#76AFA9]/10 transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Record Card 3 -->
+<div class="bg-white rounded-3xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:shadow-xl hover:shadow-slate-200/50 transition-all border border-slate-100">
+<div class="flex items-center gap-6">
+<div class="w-16 h-16 rounded-2xl bg-[#f0f7f6] flex items-center justify-center text-[#76AFA9]">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">bookmarks</span>
+</div>
+<div>
+<div class="flex items-center gap-3 mb-1">
+<span class="text-[10px] uppercase tracking-widest font-black text-slate-400">#REC-8700</span>
+<span class="px-2 py-0.5 rounded-md bg-[#eef8f7] text-[#76AFA9] text-[10px] font-bold uppercase">Personal</span>
+</div>
+<h3 class="text-lg font-bold text-slate-800">Family Emergency Validation</h3>
+<p class="text-sm text-slate-500">Submitted on Oct 01, 2023</p>
+</div>
+</div>
+<div class="flex items-center gap-6 w-full md:w-auto justify-between md:justify-end">
+<div class="flex flex-col items-end">
+<span class="text-xs font-bold text-slate-400 uppercase mb-1">Status</span>
+<div class="flex items-center gap-2 text-[#76AFA9]">
+<span class="material-symbols-outlined text-lg">check_circle</span>
+<span class="font-bold text-sm uppercase">Completed</span>
+</div>
+</div>
+<button class="p-3 rounded-2xl bg-slate-50 text-slate-400 hover:text-[#76AFA9] hover:bg-[#76AFA9]/10 transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-12 flex items-center justify-center gap-4">
+<button class="p-2 rounded-xl text-[#76AFA9] hover:bg-[#76AFA9]/10 transition-all">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-xl bg-[#76AFA9] text-white font-bold text-sm">1</button>
+<button class="w-10 h-10 rounded-xl hover:bg-slate-200 text-slate-600 font-bold text-sm transition-all">2</button>
+<button class="w-10 h-10 rounded-xl hover:bg-slate-200 text-slate-600 font-bold text-sm transition-all">3</button>
+<span class="text-slate-400 mx-1">...</span>
+<button class="w-10 h-10 rounded-xl hover:bg-slate-200 text-slate-600 font-bold text-sm transition-all">12</button>
+</div>
+<button class="p-2 rounded-xl text-[#76AFA9] hover:bg-[#76AFA9]/10 transition-all">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-[0_-8px_40px_rgba(44,51,58,0.06)] rounded-t-[24px]">
+<!-- Active Tab: Records (using inventory_2 icon) -->
+<a class="flex flex-col items-center justify-center bg-[#cce8e4] dark:bg-[#2e6863]/30 text-[#2e6863] dark:text-[#b3eee7] rounded-full p-3 cubic-bezier(0.2, 0, 0, 1) scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#586068] dark:text-slate-500 p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full cubic-bezier(0.2, 0, 0, 1) scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">history_edu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#586068] dark:text-slate-500 p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full cubic-bezier(0.2, 0, 0, 1) scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">bookmarks</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#586068] dark:text-slate-500 p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full cubic-bezier(0.2, 0, 0, 1) scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">settings</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>변명아카이브 - 마이페이지</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed": "#7df6e9",
+              "on-error": "#ffffff",
+              "inverse-surface": "#2d3135",
+              "on-primary-fixed-variant": "#00504a",
+              "error": "#ba1a1a",
+              "surface-tint": "#006a63",
+              "tertiary": "#8d4f10",
+              "on-tertiary-fixed": "#2f1500",
+              "on-error-container": "#93000a",
+              "error-container": "#ffdad6",
+              "on-primary-fixed": "#00201d",
+              "surface": "#f7f9fe",
+              "on-primary-container": "#005851",
+              "on-secondary": "#ffffff",
+              "on-secondary-fixed": "#0b1c30",
+              "surface-container-high": "#e6e8ed",
+              "on-secondary-container": "#54647a",
+              "surface-container": "#eceef3",
+              "on-surface": "#181c20",
+              "outline": "#6c7a77",
+              "on-surface-variant": "#3d4947",
+              "on-primary": "#ffffff",
+              "background": "#f7f9fe",
+              "tertiary-fixed-dim": "#ffb77d",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-fixed-variant": "#6e3900",
+              "inverse-on-surface": "#eff1f6",
+              "surface-variant": "#e0e2e7",
+              "primary": "#006a63",
+              "tertiary-fixed": "#ffdcc3",
+              "outline-variant": "#bcc9c6",
+              "inverse-primary": "#5edacd",
+              "primary-container": "#55d2c6",
+              "surface-container-low": "#f1f4f9",
+              "secondary-fixed-dim": "#b7c8e1",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#783f00",
+              "surface-bright": "#f7f9fe",
+              "secondary-container": "#d0e1fb",
+              "on-background": "#181c20",
+              "tertiary-container": "#ffad68",
+              "primary-fixed-dim": "#5edacd",
+              "secondary": "#505f76",
+              "surface-container-highest": "#e0e2e7",
+              "secondary-fixed": "#d3e4fe",
+              "on-secondary-fixed-variant": "#38485d",
+              "surface-dim": "#d8dadf"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #f7f9fe;
+      }
+      h1, h2, h3 {
+        font-family: 'Manrope', sans-serif;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-24">
+<header class="bg-white/70 backdrop-blur-xl fixed top-0 w-full z-50 shadow-[0_12px_40px_rgba(24,28,32,0.06)]">
+<div class="flex justify-between items-center px-4 h-16 w-full max-w-2xl mx-auto">
+<button class="text-slate-500 hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Manrope'] font-bold tracking-tight text-lg text-[#006a63]">변명아카이브</h1>
+<button class="text-slate-500 hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-2xl mx-auto space-y-8">
+<section class="relative">
+<div class="bg-surface-container-lowest rounded-[2rem] p-8 shadow-[0_12px_40px_rgba(24,28,32,0.04)] overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+<div class="flex flex-col items-center gap-6">
+<div class="relative group">
+<div class="w-32 h-32 rounded-full overflow-hidden p-1 bg-gradient-to-tr from-primary to-primary-container">
+<img class="w-full h-full object-cover rounded-full bg-surface" data-alt="portrait of a creative professional woman with a minimalist aesthetic, soft studio lighting, neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMyEVXl9W-q6uDzNZn8AgjAq4xKZrxMBKwT9RNXmolJPfbuywTyIrAKPr3fRJTy8e2DU5fjNIZimKfEkLmMNdWXo4ZTJ-LLP6CV7bTzl8QZK9inKnoip1ejnHmwIC0P3a8hOvMHVhij91ErqMPBKJcCCLHvktCvhGOaCzrk_fuy7WVpYt2PjrvUrVMHHJcT46PZhSqJcCKM12aoboMz697FuiTPDnuCW2mIcGnKiMecd0iO1yg-vOgpAnLQWV_oFR879XrFKbqPw8"/>
+</div>
+<button class="absolute bottom-0 right-0 bg-primary text-on-primary w-10 h-10 rounded-full flex items-center justify-center shadow-lg border-4 border-white active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+</button>
+</div>
+<div class="text-center space-y-1">
+<h2 class="text-3xl font-bold tracking-tight text-on-surface">김아카이브</h2>
+<p class="text-on-surface-variant font-medium">@curator_kim</p>
+</div>
+<div class="grid grid-cols-2 gap-4 w-full pt-4">
+<div class="bg-surface-container-low rounded-2xl p-5 text-center">
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">Total Records</p>
+<p class="text-2xl font-extrabold text-primary">128</p>
+</div>
+<div class="bg-surface-container-low rounded-2xl p-5 text-center">
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">Joined Date</p>
+<p class="text-2xl font-extrabold text-primary">23.05</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="space-y-6">
+<h3 class="text-xl font-bold px-1 text-on-surface/80">Preferences</h3>
+<div class="bg-surface-container-low rounded-[1.5rem] p-2 flex gap-1">
+<button class="flex-1 flex items-center justify-center gap-3 py-4 rounded-xl bg-surface-container-lowest shadow-sm text-primary transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="light_mode" style="font-variation-settings: 'FILL' 1;">light_mode</span>
+<span class="font-bold text-sm">Light Mode</span>
+</button>
+<button class="flex-1 flex items-center justify-center gap-3 py-4 rounded-xl text-on-surface-variant hover:bg-surface-container/50 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+<span class="font-bold text-sm">Dark Mode</span>
+</button>
+</div>
+</section>
+<section class="space-y-4">
+<h3 class="text-xl font-bold px-1 text-on-surface/80">Account Settings</h3>
+<div class="space-y-3">
+<div class="group bg-surface-container-lowest p-6 rounded-3xl flex items-center justify-between hover:bg-primary/5 transition-colors cursor-pointer">
+<div class="flex items-center gap-5">
+<div class="w-12 h-12 rounded-2xl bg-secondary-container/30 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Notifications</p>
+<p class="text-sm text-on-surface-variant">Archiving reminders &amp; alerts</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="group bg-surface-container-lowest p-6 rounded-3xl flex items-center justify-between hover:bg-primary/5 transition-colors cursor-pointer">
+<div class="flex items-center gap-5">
+<div class="w-12 h-12 rounded-2xl bg-secondary-container/30 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Security</p>
+<p class="text-sm text-on-surface-variant">Password &amp; Privacy</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="group bg-surface-container-lowest p-6 rounded-3xl flex items-center justify-between hover:bg-primary/5 transition-colors cursor-pointer">
+<div class="flex items-center gap-5">
+<div class="w-12 h-12 rounded-2xl bg-secondary-container/30 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="language">language</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Language</p>
+<p class="text-sm text-on-surface-variant">Korean (Default)</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</section>
+<section class="pt-4 pb-8">
+<button class="w-full flex items-center justify-center gap-3 py-5 rounded-3xl text-error bg-error-container/20 hover:bg-error-container/40 transition-colors font-bold group active:scale-95 duration-200">
+<span class="material-symbols-outlined group-hover:rotate-12 transition-transform" data-icon="logout">logout</span>
+                Logout from Archive
+            </button>
+<p class="mt-6 text-center text-xs text-outline-variant font-medium tracking-widest uppercase">Version 2.4.0 (Build 82)</p>
+</section>
+</main>
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-6 pb-6 pt-3 bg-white shadow-[0_-8px_30px_rgba(0,0,0,0.04)] rounded-t-3xl z-50">
+<div class="flex flex-col items-center justify-center text-slate-400 p-3 hover:text-[#55d2c6] transition-colors active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 p-3 hover:text-[#55d2c6] transition-colors active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 p-3 hover:text-[#55d2c6] transition-colors active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#55d2c6]/10 text-[#006a63] rounded-2xl p-3 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+</div>
+</nav>
+</body></html>

@@ -1,67 +1,87 @@
 import { View, Text, Pressable, FlatList, ActivityIndicator } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useQuery } from '@tanstack/react-query';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useState, useEffect } from 'react';
 import { apiClient } from '../../lib/api';
 import { useAuthStore } from '../../store/authStore';
-import { MISTAKE_TYPE_LABELS, EMOTION_LABELS } from '@excuse-archive/shared';
+import { MISTAKE_TYPE_LABELS } from '@excuse-archive/shared';
 import type { Record } from '@excuse-archive/shared';
+import { useTheme } from '../../hooks/useTheme';
 
 type FilterType = 'all' | 'pending';
 
 function RecordCard({ record }: { record: Record }) {
+  const c = useTheme();
+  const typeLabel = record.mistakeType ? MISTAKE_TYPE_LABELS[record.mistakeType] : null;
+  const dateStr = new Date(record.occurredAt).toLocaleDateString('ko-KR', { year: '2-digit', month: '2-digit', day: '2-digit' }).replace(/\. /g, '.').replace('.', '');
+
   return (
     <Pressable
       onPress={() => router.push(`/records/${record.id}`)}
-      className="bg-white rounded-xl p-4 mx-4 mb-3 border border-gray-200"
+      style={{ backgroundColor: c.card, borderRadius: 24, padding: 20, marginHorizontal: 16, marginBottom: 12, ...c.shadowSm }}
     >
-      <View className="flex-row justify-between items-start">
-        <View className="flex-1">
-          <Text className="text-gray-900 font-medium">{record.situation}</Text>
-          <Text className="text-gray-600 text-sm mt-1">{record.myAction}</Text>
-        </View>
-        {record.nextActionDone ? (
-          <View className="ml-2 px-2 py-1 bg-green-100 rounded-full">
-            <Text className="text-green-700 text-xs">완료</Text>
+      {/* 상단: 타입 태그 + 날짜 */}
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
+        {typeLabel ? (
+          <View style={{ paddingHorizontal: 10, paddingVertical: 4, backgroundColor: c.accentMuted, borderRadius: 9999 }}>
+            <Text style={{ fontFamily: 'Manrope_600SemiBold', fontSize: 10, color: c.accent, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+              {typeLabel}
+            </Text>
           </View>
         ) : (
-          <View className="ml-2 px-2 py-1 bg-orange-100 rounded-full">
-            <Text className="text-orange-700 text-xs">미완료</Text>
+          <View style={{ paddingHorizontal: 10, paddingVertical: 4, backgroundColor: c.section, borderRadius: 9999 }}>
+            <Text style={{ fontFamily: 'Manrope_600SemiBold', fontSize: 10, color: c.textMuted, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+              기타
+            </Text>
           </View>
         )}
+        <Text style={{ fontFamily: 'Manrope_400Regular', fontSize: 12, color: c.textMuted }}>{dateStr}</Text>
       </View>
-      <View className="flex-row items-center gap-2 mt-3 flex-wrap">
-        {record.mistakeType && (
-          <View className="px-2 py-0.5 bg-gray-100 rounded">
-            <Text className="text-gray-600 text-xs">{MISTAKE_TYPE_LABELS[record.mistakeType]}</Text>
+
+      {/* 제목 */}
+      <Text style={{ fontFamily: 'Manrope_700Bold', fontSize: 18, color: c.textPrimary, lineHeight: 24, marginBottom: 8 }} numberOfLines={2}>
+        {record.situation}
+      </Text>
+
+      {/* 요약 */}
+      <Text style={{ fontFamily: 'Manrope_400Regular', fontSize: 13, color: c.textSecondary, lineHeight: 20 }} numberOfLines={2}>
+        {record.myAction}
+      </Text>
+
+      {/* 하단: 완료 상태 */}
+      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 16 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+          <View style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: c.accentFill + '30', alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ fontFamily: 'Manrope_700Bold', fontSize: 11, color: c.accent }}>
+              {record.situation?.slice(0, 1).toUpperCase() ?? '?'}
+            </Text>
+          </View>
+          <Text style={{ fontFamily: 'Manrope_500Medium', fontSize: 12, color: c.textMuted }}>아카이브</Text>
+        </View>
+        {record.nextActionDone ? (
+          <View style={{ paddingHorizontal: 10, paddingVertical: 4, backgroundColor: c.accentMuted, borderRadius: 9999 }}>
+            <Text style={{ color: c.accent, fontSize: 11, fontFamily: 'Manrope_500Medium' }}>완료 ✓</Text>
+          </View>
+        ) : (
+          <View style={{ paddingHorizontal: 10, paddingVertical: 4, backgroundColor: '#FB923C18', borderRadius: 9999 }}>
+            <Text style={{ color: '#FB923C', fontSize: 11, fontFamily: 'Manrope_500Medium' }}>미완료</Text>
           </View>
         )}
-        {record.emotion && (
-          <View className="px-2 py-0.5 bg-gray-100 rounded">
-            <Text className="text-gray-600 text-xs">{EMOTION_LABELS[record.emotion]}</Text>
-          </View>
-        )}
-      </View>
-      <View className="mt-2">
-        <Text className="text-sm text-gray-700" numberOfLines={1}>
-          <Text className="font-medium">다음 행동: </Text>
-          {record.nextAction}
-        </Text>
       </View>
     </Pressable>
   );
 }
 
 export default function RecordsScreen() {
+  const c = useTheme();
   const { token } = useAuthStore();
   const params = useLocalSearchParams<{ filter?: string }>();
   const [filter, setFilter] = useState<FilterType>('all');
   const [page, setPage] = useState(0);
 
   useEffect(() => {
-    if (params.filter === 'pending') {
-      setFilter('pending');
-    }
+    if (params.filter === 'pending') setFilter('pending');
   }, [params.filter]);
 
   const { data: pagedData, isLoading: pagedLoading } = useQuery({
@@ -77,7 +97,6 @@ export default function RecordsScreen() {
   });
 
   const isLoading = filter === 'all' ? pagedLoading : allLoading;
-
   const displayRecords: Record[] =
     filter === 'pending'
       ? (allData?.content ?? []).filter((r) => !r.nextActionDone)
@@ -86,57 +105,71 @@ export default function RecordsScreen() {
   const totalPages = pagedData?.totalPages ?? 1;
 
   return (
-    <View className="flex-1 bg-gray-50">
+    <View style={{ flex: 1, backgroundColor: c.bg }}>
       {/* 헤더 */}
-      <View className="flex-row justify-between items-center px-4 py-4">
-        <Text className="text-2xl font-bold text-gray-900">내 기록</Text>
-        <Pressable
-          onPress={() => router.push('/records/new')}
-          className="bg-primary-600 px-4 py-2 rounded-lg"
-        >
-          <Text className="text-white text-sm font-medium">+ 새 기록</Text>
+      <View style={{ paddingHorizontal: 20, paddingTop: 24, paddingBottom: 20, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+        <View>
+          <Text style={{ fontFamily: 'Manrope_800ExtraBold', fontSize: 40, color: c.textPrimary, letterSpacing: -1, lineHeight: 44 }}>내 기록</Text>
+          <Text style={{ fontFamily: 'Manrope_400Regular', fontSize: 14, color: c.textSecondary, marginTop: 4 }}>아카이브된 모든 순간의 기록들</Text>
+        </View>
+        <Pressable onPress={() => router.push('/records/new')}>
+          <LinearGradient
+            colors={[c.gradientStart, c.gradientEnd]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={{ borderRadius: 9999, paddingHorizontal: 20, paddingVertical: 12, flexDirection: 'row', alignItems: 'center', gap: 4 }}
+          >
+            <Text style={{ fontFamily: 'Manrope_700Bold', color: '#ffffff', fontSize: 14 }}>+ New</Text>
+          </LinearGradient>
         </Pressable>
       </View>
 
       {/* 필터 탭 */}
-      <View className="flex-row bg-gray-100 mx-4 rounded-lg p-1 mb-3">
-        <Pressable
-          onPress={() => { setFilter('all'); setPage(0); }}
-          className={`flex-1 py-2 rounded-md items-center ${filter === 'all' ? 'bg-white shadow-sm' : ''}`}
-        >
-          <Text className={`text-sm font-medium ${filter === 'all' ? 'text-gray-900' : 'text-gray-500'}`}>
-            전체
-          </Text>
-        </Pressable>
-        <Pressable
-          onPress={() => setFilter('pending')}
-          className={`flex-1 py-2 rounded-md items-center ${filter === 'pending' ? 'bg-white shadow-sm' : ''}`}
-        >
-          <Text className={`text-sm font-medium ${filter === 'pending' ? 'text-orange-600' : 'text-gray-500'}`}>
-            미완료
-          </Text>
-        </Pressable>
+      <View style={{ flexDirection: 'row', marginHorizontal: 20, marginBottom: 16 }}>
+        <View style={{ flexDirection: 'row', backgroundColor: c.section, borderRadius: 14, padding: 4 }}>
+          {(['all', 'pending'] as FilterType[]).map((f) => (
+            <Pressable
+              key={f}
+              onPress={() => { setFilter(f); if (f === 'all') setPage(0); }}
+              style={{
+                paddingHorizontal: 20,
+                paddingVertical: 9,
+                borderRadius: 10,
+                backgroundColor: filter === f ? c.card : 'transparent',
+              }}
+            >
+              <Text style={{
+                fontFamily: 'Manrope_600SemiBold',
+                fontSize: 13,
+                color: filter === f ? c.accent : c.textMuted,
+              }}>
+                {f === 'all' ? 'All' : 'Pending'}
+              </Text>
+            </Pressable>
+          ))}
+        </View>
       </View>
 
       {isLoading ? (
-        <View className="flex-1 items-center justify-center">
-          <ActivityIndicator color="#0ea5e9" />
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <ActivityIndicator color={c.accent} />
         </View>
       ) : displayRecords.length === 0 ? (
-        <View className="flex-1 items-center justify-center px-4">
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 20 }}>
           {filter === 'pending' ? (
             <>
-              <Text className="text-4xl mb-4">🎉</Text>
-              <Text className="text-gray-700 font-medium mb-1">미완료 행동이 없어요</Text>
-              <Text className="text-gray-500 text-sm">모든 다음 행동을 완료했습니다</Text>
+              <Text style={{ fontSize: 48, marginBottom: 12 }}>🎉</Text>
+              <Text style={{ fontFamily: 'Manrope_700Bold', color: c.textPrimary, fontSize: 16, marginBottom: 4 }}>미완료 행동이 없어요</Text>
+              <Text style={{ fontFamily: 'Manrope_400Regular', color: c.textMuted, fontSize: 13 }}>모든 다음 행동을 완료했습니다</Text>
             </>
           ) : (
-            <>
-              <Text className="text-gray-500 mb-4">아직 기록이 없습니다</Text>
+            <View style={{ backgroundColor: c.card, borderRadius: 24, padding: 32, alignItems: 'center', width: '100%' }}>
+              <Text style={{ fontSize: 40, marginBottom: 12 }}>📦</Text>
+              <Text style={{ fontFamily: 'Manrope_400Regular', color: c.textMuted, marginBottom: 16, fontSize: 14 }}>기록을 추가해 주세요</Text>
               <Pressable onPress={() => router.push('/records/new')}>
-                <Text className="text-primary-600 font-medium">첫 기록 작성하기</Text>
+                <Text style={{ fontFamily: 'Manrope_500Medium', color: c.accent }}>첫 기록 작성하기</Text>
               </Pressable>
-            </>
+            </View>
           )}
         </View>
       ) : (
@@ -144,28 +177,32 @@ export default function RecordsScreen() {
           data={displayRecords}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => <RecordCard record={item} />}
-          contentContainerStyle={{ paddingVertical: 8 }}
+          contentContainerStyle={{ paddingTop: 4, paddingBottom: 24 }}
           ListFooterComponent={
             filter === 'all' && totalPages > 1 ? (
-              <View className="flex-row justify-center gap-4 py-4">
+              <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 10, paddingVertical: 20, paddingHorizontal: 16 }}>
                 <Pressable
                   onPress={() => setPage((p) => Math.max(0, p - 1))}
                   disabled={page === 0}
-                  className={`px-4 py-2 rounded-lg border ${page === 0 ? 'border-gray-200' : 'border-gray-400'}`}
+                  style={{ width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center', backgroundColor: page === 0 ? c.section : c.card }}
                 >
-                  <Text className={page === 0 ? 'text-gray-300' : 'text-gray-700'}>이전</Text>
+                  <Text style={{ fontFamily: 'Manrope_500Medium', color: page === 0 ? c.textMuted : c.textPrimary }}>‹</Text>
                 </Pressable>
-                <View className="justify-center">
-                  <Text className="text-gray-500 text-sm">
-                    {page + 1} / {totalPages}
-                  </Text>
-                </View>
+                {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => (
+                  <Pressable
+                    key={i}
+                    onPress={() => setPage(i)}
+                    style={{ width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center', backgroundColor: page === i ? c.accent : c.card }}
+                  >
+                    <Text style={{ fontFamily: 'Manrope_600SemiBold', fontSize: 14, color: page === i ? '#ffffff' : c.textMuted }}>{i + 1}</Text>
+                  </Pressable>
+                ))}
                 <Pressable
                   onPress={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
                   disabled={page >= totalPages - 1}
-                  className={`px-4 py-2 rounded-lg border ${page >= totalPages - 1 ? 'border-gray-200' : 'border-gray-400'}`}
+                  style={{ width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center', backgroundColor: page >= totalPages - 1 ? c.section : c.card }}
                 >
-                  <Text className={page >= totalPages - 1 ? 'text-gray-300' : 'text-gray-700'}>다음</Text>
+                  <Text style={{ fontFamily: 'Manrope_500Medium', color: page >= totalPages - 1 ? c.textMuted : c.textPrimary }}>›</Text>
                 </Pressable>
               </View>
             ) : null

@@ -114,6 +114,15 @@ export interface PatternReportResponse {
   topTriggers: PatternItem[];
 }
 
+// 유저 프로필
+export interface UserProfile {
+  email: string | null;
+  displayName: string | null;
+  createdAt: string;
+  type: 'REGISTERED' | 'ANONYMOUS';
+  recordCount: number;
+}
+
 // API 에러 응답
 export interface ApiError {
   error: string;

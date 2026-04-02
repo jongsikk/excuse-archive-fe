@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Excuse Archive - My Page</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-fixed": "#084155",
+              "tertiary-fixed": "#b4e4fc",
+              "on-secondary": "#e2fffb",
+              "surface-tint": "#2e6863",
+              "secondary-container": "#cce8e4",
+              "on-primary-fixed": "#014843",
+              "on-tertiary": "#f3faff",
+              "primary-container": "#b3eee7",
+              "error-container": "#fa746f",
+              "inverse-surface": "#0b0f12",
+              "on-error-container": "#6e0a12",
+              "inverse-primary": "#bbf6ef",
+              "surface-container-lowest": "#ffffff",
+              "on-background": "#2c333a",
+              "primary": "#2e6863",
+              "on-primary-container": "#1f5b56",
+              "primary-dim": "#205c57",
+              "surface-dim": "#d3dbe4",
+              "error-dim": "#67040d",
+              "tertiary-dim": "#28596d",
+              "on-tertiary-fixed-variant": "#2e5d72",
+              "surface-container-high": "#e3e9f1",
+              "surface": "#f7f9fe",
+              "background": "#f7f9fe",
+              "on-tertiary-container": "#235468",
+              "tertiary": "#36657a",
+              "surface-container-low": "#f0f4fa",
+              "tertiary-container": "#b4e4fc",
+              "secondary-fixed": "#cce8e4",
+              "inverse-on-surface": "#9a9da2",
+              "on-secondary-container": "#3d5654",
+              "surface-container": "#e9eef6",
+              "tertiary-fixed-dim": "#a7d5ee",
+              "on-surface": "#2c333a",
+              "on-primary": "#e1fffb",
+              "surface-variant": "#dce3ed",
+              "surface-container-highest": "#dce3ed",
+              "on-secondary-fixed": "#2b4441",
+              "surface-bright": "#f7f9fe",
+              "on-error": "#fff7f6",
+              "on-primary-fixed-variant": "#2a6560",
+              "primary-fixed-dim": "#a5dfd9",
+              "on-surface-variant": "#586068",
+              "primary-fixed": "#b3eee7",
+              "outline": "#747b84",
+              "error": "#a83836",
+              "secondary-dim": "#3f5855",
+              "outline-variant": "#abb3bc",
+              "secondary": "#4a6461",
+              "on-secondary-fixed-variant": "#47605d",
+              "secondary-fixed-dim": "#bedad6"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-[#f7f9fe] dark:bg-slate-950 flex justify-between items-center w-full px-6 h-16 sticky top-0 z-50">
+<button class="text-[#2e6863] dark:text-[#76AFA9] hover:opacity-80 transition-opacity duration-300">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="Manrope text-lg uppercase tracking-[0.05em] font-bold text-[#2e6863] dark:text-[#76AFA9]">EXCUSE ARCHIVE</h1>
+<button class="text-[#2e6863] dark:text-[#76AFA9] hover:opacity-80 transition-opacity duration-300">
+<span class="material-symbols-outlined">search</span>
+</button>
+</header>
+<main class="max-w-2xl mx-auto px-6 py-12 pb-32">
+<!-- Profile Section -->
+<section class="flex flex-col items-center mb-16">
+<div class="relative mb-6">
+<div class="w-28 h-28 rounded-full border-[3px] border-[#76AFA9] p-1 bg-surface-container-low">
+<img alt="User Profile" class="w-full h-full rounded-full object-cover" data-alt="Sophisticated portrait of a creative professional in a sunlit studio, soft natural lighting, muted earth tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKt43dFo5Yi5cvOvCaL6A4i-0DRxG_1SR_Cjqw6NgInKhEDzBPEkYB6fL6xxJ-rDht2kllUm_Oeow6Ianl-borH16D9bF-wTIGvWOWAoSHcDwYsR_eUARW9DHiF6LntsChREFDwIXe0jzP4pB29ECvjgiUtYGJDaPZ9RGdo2M9Y57SEHpxslC7oN-i5UKfmho0Skj6hixLukDktBo9E4hLA9UTj9B_JiEyY8kLd4gsGZwuTEc8TmPo-CSJx0Lllz44BGO6AbkVdZ0"/>
+</div>
+<div class="absolute bottom-0 right-0 bg-[#76AFA9] text-white p-1.5 rounded-full flex items-center justify-center border-4 border-background">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">edit</span>
+</div>
+</div>
+<h2 class="text-2xl font-extrabold tracking-tight text-on-surface mb-1">Julianne Thorne</h2>
+<p class="text-on-surface-variant font-medium text-sm">j.thorne@archive.design</p>
+<!-- Quick Stats -->
+<div class="flex gap-12 mt-10 w-full justify-center">
+<div class="text-center">
+<span class="block text-2xl font-bold text-on-surface">1,402</span>
+<span class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Archived</span>
+</div>
+<div class="text-center">
+<span class="block text-2xl font-bold text-on-surface">Oct '22</span>
+<span class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Joined</span>
+</div>
+</div>
+</section>
+<!-- Functional Sections -->
+<div class="space-y-12">
+<!-- Preferences Layer -->
+<div class="bg-surface-container-low rounded-[2rem] p-8">
+<h3 class="text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant mb-8 px-2">Visual Preferences</h3>
+<div class="flex items-center justify-between px-2 group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-surface-container-lowest flex items-center justify-center text-[#76AFA9]">
+<span class="material-symbols-outlined">light_mode</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Appearance</p>
+<p class="text-xs text-on-surface-variant">Currently in Light Mode</p>
+</div>
+</div>
+<div class="w-12 h-6 bg-secondary-container rounded-full relative transition-colors duration-300">
+<div class="absolute left-1 top-1 w-4 h-4 bg-[#76AFA9] rounded-full shadow-sm"></div>
+</div>
+</div>
+</div>
+<!-- Settings Layer -->
+<div>
+<h3 class="text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant mb-6 px-4">Account Systems</h3>
+<div class="space-y-2">
+<!-- Notification -->
+<div class="flex items-center justify-between p-4 hover:bg-surface-container-low rounded-2xl transition-all duration-300 group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center text-on-surface-variant group-hover:text-[#76AFA9] transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</div>
+<span class="font-semibold text-on-surface">Notifications</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-sm">chevron_right</span>
+</div>
+<!-- Security -->
+<div class="flex items-center justify-between p-4 hover:bg-surface-container-low rounded-2xl transition-all duration-300 group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center text-on-surface-variant group-hover:text-[#76AFA9] transition-colors">
+<span class="material-symbols-outlined">security</span>
+</div>
+<span class="font-semibold text-on-surface">Security &amp; Access</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-sm">chevron_right</span>
+</div>
+<!-- Language -->
+<div class="flex items-center justify-between p-4 hover:bg-surface-container-low rounded-2xl transition-all duration-300 group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center text-on-surface-variant group-hover:text-[#76AFA9] transition-colors">
+<span class="material-symbols-outlined">translate</span>
+</div>
+<div>
+<p class="font-semibold text-on-surface">Language</p>
+<p class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">English (US)</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-sm">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Danger Zone -->
+<div class="pt-6 border-t border-surface-container-high">
+<button class="w-full flex items-center gap-4 p-4 text-error hover:bg-error-container/10 rounded-2xl transition-all duration-300 group">
+<div class="w-10 h-10 flex items-center justify-center">
+<span class="material-symbols-outlined">logout</span>
+</div>
+<span class="font-bold tracking-tight">Sign Out from Archive</span>
+</button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-[0_-8px_40px_rgba(44,51,58,0.06)] rounded-t-[24px]">
+<div class="flex flex-col items-center justify-center text-[#586068] dark:text-slate-500 p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-all duration-300 scale-95">
+<span class="material-symbols-outlined">inventory_2</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#586068] dark:text-slate-500 p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-all duration-300 scale-95">
+<span class="material-symbols-outlined">history_edu</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#586068] dark:text-slate-500 p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-all duration-300 scale-95">
+<span class="material-symbols-outlined">bookmarks</span>
+</div>
+<!-- Active Tab: Profile/Settings -->
+<div class="flex flex-col items-center justify-center bg-[#cce8e4] dark:bg-[#2e6863]/30 text-[#2e6863] dark:text-[#b3eee7] rounded-full p-3 transition-transform scale-100">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+</div>
+</nav>
+</body></html>

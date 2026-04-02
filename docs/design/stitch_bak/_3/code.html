@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>변명아카이브 - Excuse Archive</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed": "#7df6e9",
+              "on-error": "#ffffff",
+              "inverse-surface": "#2d3135",
+              "on-primary-fixed-variant": "#00504a",
+              "error": "#ba1a1a",
+              "surface-tint": "#006a63",
+              "tertiary": "#8d4f10",
+              "on-tertiary-fixed": "#2f1500",
+              "on-error-container": "#93000a",
+              "error-container": "#ffdad6",
+              "on-primary-fixed": "#00201d",
+              "surface": "#f7f9fe",
+              "on-primary-container": "#005851",
+              "on-secondary": "#ffffff",
+              "on-secondary-fixed": "#0b1c30",
+              "surface-container-high": "#e6e8ed",
+              "on-secondary-container": "#54647a",
+              "surface-container": "#eceef3",
+              "on-surface": "#181c20",
+              "outline": "#6c7a77",
+              "on-surface-variant": "#3d4947",
+              "on-primary": "#ffffff",
+              "background": "#f7f9fe",
+              "tertiary-fixed-dim": "#ffb77d",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-fixed-variant": "#6e3900",
+              "inverse-on-surface": "#eff1f6",
+              "surface-variant": "#e0e2e7",
+              "primary": "#006a63",
+              "tertiary-fixed": "#ffdcc3",
+              "outline-variant": "#bcc9c6",
+              "inverse-primary": "#5edacd",
+              "primary-container": "#55d2c6",
+              "surface-container-low": "#f1f4f9",
+              "secondary-fixed-dim": "#b7c8e1",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#783f00",
+              "surface-bright": "#f7f9fe",
+              "secondary-container": "#d0e1fb",
+              "on-background": "#181c20",
+              "tertiary-container": "#ffad68",
+              "primary-fixed-dim": "#5edacd",
+              "secondary": "#505f76",
+              "surface-container-highest": "#e0e2e7",
+              "secondary-fixed": "#d3e4fe",
+              "on-secondary-fixed-variant": "#38485d",
+              "surface-dim": "#d8dadf"
+            },
+            fontFamily: {
+              "headline": ["Manrope", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "3xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      body {
+        background-color: #f7f9fe;
+        font-family: 'Inter', sans-serif;
+        color: #181c20;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl shadow-[0_12px_40px_rgba(24,28,32,0.06)] h-16 flex justify-between items-center px-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#006a63]">archive</span>
+<h1 class="font-['Manrope'] font-bold tracking-tight text-lg text-[#006a63]">변명아카이브</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-500 hover:opacity-80 transition-opacity cursor-pointer">search</span>
+<span class="material-symbols-outlined text-slate-500 hover:opacity-80 transition-opacity cursor-pointer">notifications</span>
+</div>
+</header>
+<main class="mt-24 px-6 max-w-2xl mx-auto space-y-8">
+<!-- Welcome Hero Section -->
+<section class="space-y-2">
+<h2 class="font-['Manrope'] text-3xl font-extrabold tracking-tight text-on-surface">안녕하세요, 민수님</h2>
+<p class="font-['Inter'] text-on-surface-variant text-md leading-relaxed">오늘의 변명은 어떤 색인가요? 당신의 기록이 아카이브되고 있습니다.</p>
+</section>
+<!-- Orange Streak Banner -->
+<div class="bg-[#FB923C]/10 border border-[#FB923C]/30 rounded-3xl p-5 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="bg-[#FB923C] text-white p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<div>
+<p class="text-[#FB923C] font-bold text-lg leading-none">12일째 연속 변명 기록 중!</p>
+<p class="text-[#FB923C]/80 text-sm font-medium">꾸준한 성찰이 명확한 변화를 만듭니다.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-[#FB923C]">chevron_right</span>
+</div>
+<!-- Bento Grid: Stats & Heatmap -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Weekly Stats Card -->
+<div class="bg-surface-container-lowest p-6 rounded-3xl space-y-6 shadow-sm border border-outline-variant/10">
+<div class="flex items-center justify-between">
+<h3 class="font-['Manrope'] font-bold text-lg">주간 통계</h3>
+<span class="text-xs font-medium text-on-surface-variant bg-surface-container px-2 py-1 rounded-full">최근 7일</span>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<div class="text-center">
+<p class="text-on-surface-variant text-[10px] font-bold uppercase tracking-wider mb-1">Total</p>
+<p class="text-2xl font-['Manrope'] font-extrabold text-primary">28</p>
+<p class="text-[10px] text-on-surface-variant">Records</p>
+</div>
+<div class="text-center">
+<p class="text-on-surface-variant text-[10px] font-bold uppercase tracking-wider mb-1">Avg</p>
+<p class="text-2xl font-['Manrope'] font-extrabold text-primary">4.2</p>
+<p class="text-[10px] text-on-surface-variant">Intensity</p>
+</div>
+<div class="text-center">
+<p class="text-on-surface-variant text-[10px] font-bold uppercase tracking-wider mb-1">Main</p>
+<span class="material-symbols-outlined text-primary text-xl">schedule</span>
+<p class="text-[10px] text-on-surface-variant">Time</p>
+</div>
+</div>
+</div>
+<!-- Profile Overview Card (Asymmetric Layout) -->
+<div class="bg-primary text-white p-6 rounded-3xl flex flex-col justify-between relative overflow-hidden shadow-lg">
+<div class="relative z-10">
+<p class="text-primary-fixed/80 text-sm font-medium">Archive Tier</p>
+<h3 class="text-2xl font-['Manrope'] font-extrabold">Professional Philosopher</h3>
+</div>
+<div class="flex items-end justify-between relative z-10 mt-8">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-primary bg-white/20"></div>
+<div class="w-8 h-8 rounded-full border-2 border-primary bg-white/40"></div>
+<div class="w-8 h-8 rounded-full border-2 border-primary bg-white/60"></div>
+</div>
+<p class="text-xs text-primary-fixed">1,240 Total Excuses</p>
+</div>
+<!-- Abstract Texture Background -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+</div>
+</div>
+<!-- Calendar Heatmap Card -->
+<section class="bg-surface-container-lowest p-6 rounded-3xl space-y-6 shadow-sm border border-outline-variant/10">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-['Manrope'] font-bold text-lg">기록 아카이브</h3>
+<p class="text-xs text-on-surface-variant">활동 밀도를 시각적으로 확인하세요</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-on-surface-variant font-medium">Low</span>
+<div class="flex gap-1">
+<div class="w-3 h-3 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-3 h-3 rounded-sm bg-[#55d2c6]/40"></div>
+<div class="w-3 h-3 rounded-sm bg-[#55d2c6]"></div>
+<div class="w-3 h-3 rounded-sm bg-[#006a63]"></div>
+<div class="w-3 h-3 rounded-sm bg-[#FB923C]"></div>
+<div class="w-3 h-3 rounded-sm bg-[#ba1a1a]"></div>
+</div>
+<span class="text-[10px] text-on-surface-variant font-medium">High</span>
+</div>
+</div>
+<!-- Heatmap Grid Simulation -->
+<div class="grid grid-cols-12 gap-1.5 overflow-x-auto pb-2">
+<!-- 12 Columns representing 12 months or similar chunks -->
+<div class="grid grid-rows-7 gap-1.5 shrink-0">
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#55d2c6]/40"></div>
+<div class="w-4 h-4 rounded-sm bg-[#55d2c6]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#006a63]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+</div>
+<!-- Repeat pattern -->
+<div class="grid grid-rows-7 gap-1.5 shrink-0">
+<div class="w-4 h-4 rounded-sm bg-[#55d2c6]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#006a63]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#FB923C]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#55d2c6]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#55d2c6]/40"></div>
+</div>
+<div class="grid grid-rows-7 gap-1.5 shrink-0">
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#ba1a1a]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#006a63]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#55d2c6]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+</div>
+<!-- More columns for visual weight -->
+<div class="grid grid-rows-7 gap-1.5 shrink-0">
+<div class="w-4 h-4 rounded-sm bg-[#006a63]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#55d2c6]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#FB923C]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#55d2c6]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#006a63]"></div>
+</div>
+<div class="grid grid-rows-7 gap-1.5 shrink-0">
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#006a63]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#006a63]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#ba1a1a]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#55d2c6]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+</div>
+<div class="grid grid-rows-7 gap-1.5 shrink-0">
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#55d2c6]/40"></div>
+<div class="w-4 h-4 rounded-sm bg-[#55d2c6]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#006a63]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+</div>
+<div class="grid grid-rows-7 gap-1.5 shrink-0">
+<div class="w-4 h-4 rounded-sm bg-[#55d2c6]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#006a63]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#FB923C]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#55d2c6]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#55d2c6]/40"></div>
+</div>
+<div class="grid grid-rows-7 gap-1.5 shrink-0">
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#ba1a1a]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#006a63]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#55d2c6]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+</div>
+<div class="grid grid-rows-7 gap-1.5 shrink-0">
+<div class="w-4 h-4 rounded-sm bg-[#006a63]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#55d2c6]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#FB923C]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#55d2c6]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#006a63]"></div>
+</div>
+<div class="grid grid-rows-7 gap-1.5 shrink-0">
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#006a63]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#006a63]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#ba1a1a]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#55d2c6]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+</div>
+<div class="grid grid-rows-7 gap-1.5 shrink-0">
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#ba1a1a]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#006a63]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#55d2c6]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+</div>
+<div class="grid grid-rows-7 gap-1.5 shrink-0">
+<div class="w-4 h-4 rounded-sm bg-[#006a63]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#55d2c6]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#FB923C]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#55d2c6]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#E2E8F0]"></div>
+<div class="w-4 h-4 rounded-sm bg-[#006a63]"></div>
+</div>
+</div>
+</section>
+<!-- Recent Records Section -->
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="font-['Manrope'] font-bold text-xl">최근 보관소</h3>
+<button class="text-primary text-sm font-semibold">전체보기</button>
+</div>
+<!-- Record List -->
+<div class="space-y-4">
+<!-- Record Item 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-3xl flex items-center gap-6 shadow-sm group">
+<div class="w-12 h-12 rounded-2xl bg-error/10 text-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">priority_high</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-bold text-on-surface">"운동은 내일부터 해도 늦지 않아"</h4>
+<span class="text-[10px] font-bold text-on-surface-variant">14:20</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 bg-surface-container text-[10px] rounded-full text-on-secondary-container">자기합리화</span>
+<span class="px-2 py-0.5 bg-error-container text-[10px] rounded-full text-on-error-container">심각도: 상</span>
+</div>
+</div>
+</div>
+<!-- Record Item 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-3xl flex items-center gap-6 shadow-sm">
+<div class="w-12 h-12 rounded-2xl bg-tertiary-container/20 text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-bold text-on-surface">"차가 너무 막혀서 어쩔 수 없었어"</h4>
+<span class="text-[10px] font-bold text-on-surface-variant">09:15</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 bg-surface-container text-[10px] rounded-full text-on-secondary-container">상황탓</span>
+<span class="px-2 py-0.5 bg-tertiary-fixed text-[10px] rounded-full text-on-tertiary-container">심각도: 중</span>
+</div>
+</div>
+</div>
+<!-- Record Item 3 -->
+<div class="bg-surface-container-lowest p-6 rounded-3xl flex items-center gap-6 shadow-sm">
+<div class="w-12 h-12 rounded-2xl bg-primary-container/20 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">coffee</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-bold text-on-surface">"카페인이 부족해서 집중이 안 돼"</h4>
+<span class="text-[10px] font-bold text-on-surface-variant">Yesterday</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 bg-surface-container text-[10px] rounded-full text-on-secondary-container">신체적 핑계</span>
+<span class="px-2 py-0.5 bg-primary-fixed text-[10px] rounded-full text-on-primary-container">심각도: 하</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-6 w-16 h-16 bg-gradient-to-br from-[#006a63] to-[#55d2c6] text-white rounded-full shadow-[0_12px_40px_rgba(0,106,99,0.3)] flex items-center justify-center active:scale-90 transition-all duration-200 z-[60]">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-6 pb-6 pt-3 bg-white shadow-[0_-8px_30px_rgba(0,0,0,0.04)] rounded-t-3xl z-50">
+<a class="flex flex-col items-center justify-center bg-[#55d2c6]/10 text-[#006a63] rounded-2xl p-3 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 p-3 hover:text-[#55d2c6] transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">database</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 p-3 hover:text-[#55d2c6] transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 p-3 hover:text-[#55d2c6] transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-fixed": "#7df6e9",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#2d3135",
+                        "on-primary-fixed-variant": "#00504a",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#006a63",
+                        "tertiary": "#8d4f10",
+                        "on-tertiary-fixed": "#2f1500",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#00201d",
+                        "surface": "#f7f9fe",
+                        "on-primary-container": "#005851",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#0b1c30",
+                        "surface-container-high": "#e6e8ed",
+                        "on-secondary-container": "#54647a",
+                        "surface-container": "#eceef3",
+                        "on-surface": "#181c20",
+                        "outline": "#6c7a77",
+                        "on-surface-variant": "#3d4947",
+                        "on-primary": "#ffffff",
+                        "background": "#f7f9fe",
+                        "tertiary-fixed-dim": "#ffb77d",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#6e3900",
+                        "inverse-on-surface": "#eff1f6",
+                        "surface-variant": "#e0e2e7",
+                        "primary": "#006a63",
+                        "tertiary-fixed": "#ffdcc3",
+                        "outline-variant": "#bcc9c6",
+                        "inverse-primary": "#5edacd",
+                        "primary-container": "#55d2c6",
+                        "surface-container-low": "#f1f4f9",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#783f00",
+                        "surface-bright": "#f7f9fe",
+                        "secondary-container": "#d0e1fb",
+                        "on-background": "#181c20",
+                        "tertiary-container": "#ffad68",
+                        "primary-fixed-dim": "#5edacd",
+                        "secondary": "#505f76",
+                        "surface-container-highest": "#e0e2e7",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "surface-dim": "#d8dadf"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "3xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl shadow-[0_12px_40px_rgba(24,28,32,0.06)]">
+<div class="flex justify-between items-center px-4 h-16 w-full">
+<button class="text-slate-500 hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-[#006a63] font-['Manrope'] font-bold tracking-tight text-lg">변명아카이브</h1>
+<button class="text-slate-500 hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-2xl mx-auto">
+<!-- Editorial Header -->
+<section class="mb-10">
+<span class="text-primary font-semibold text-sm tracking-widest mb-2 block">ANALYTICS</span>
+<h2 class="text-4xl font-extrabold tracking-tight text-on-surface mb-2">패턴 리포트</h2>
+<p class="text-on-surface-variant leading-relaxed">당신의 변명이 그리는 숨겨진 궤적을 확인하세요.</p>
+</section>
+<!-- Segment Control -->
+<section class="mb-8">
+<div class="bg-surface-container-low p-1.5 rounded-2xl flex items-center">
+<button class="flex-1 py-2.5 text-sm font-semibold rounded-xl bg-surface-container-lowest text-primary shadow-sm">7일</button>
+<button class="flex-1 py-2.5 text-sm font-medium text-on-surface-variant hover:text-on-surface transition-colors">30일</button>
+</div>
+<div class="mt-4 flex items-center justify-center gap-2 text-on-surface-variant text-sm">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+<span>2023.10.20 - 2023.10.27</span>
+</div>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Intensity Trend (Large Card) -->
+<section class="col-span-1 md:col-span-2 bg-surface-container-lowest p-8 rounded-3xl">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h3 class="text-xl font-bold mb-1">변명 강도 추이</h3>
+<p class="text-on-surface-variant text-sm">시간에 따른 평균 감정 강도</p>
+</div>
+<div class="text-right">
+<span class="text-3xl font-black text-primary">4.2</span>
+<span class="text-on-surface-variant text-xs block">이번 주 평균</span>
+</div>
+</div>
+<!-- Simple Bar Chart Representation -->
+<div class="flex items-end justify-between h-40 gap-2 px-2">
+<div class="flex-1 bg-surface-container-high rounded-t-lg relative group h-[40%]">
+<div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity"></div>
+</div>
+<div class="flex-1 bg-surface-container-high rounded-t-lg relative group h-[65%]"></div>
+<div class="flex-1 bg-primary rounded-t-lg relative h-[85%]"></div>
+<div class="flex-1 bg-surface-container-high rounded-t-lg relative group h-[50%]"></div>
+<div class="flex-1 bg-surface-container-high rounded-t-lg relative group h-[30%]"></div>
+<div class="flex-1 bg-surface-container-high rounded-t-lg relative group h-[70%]"></div>
+<div class="flex-1 bg-primary-container rounded-t-lg relative h-[95%]"></div>
+</div>
+<div class="flex justify-between mt-4 text-[10px] text-on-surface-variant font-medium">
+<span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span><span>SUN</span>
+</div>
+</section>
+<!-- Horizontal Bars: Mistake Types -->
+<section class="bg-surface-container-lowest p-8 rounded-3xl">
+<h3 class="text-lg font-bold mb-6">주요 변명 유형</h3>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="font-medium">업무 관련</span>
+<span class="text-on-surface-variant">42%</span>
+</div>
+<div class="w-full bg-surface-container-low h-3 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 42%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="font-medium">자기 관리</span>
+<span class="text-on-surface-variant">30%</span>
+</div>
+<div class="w-full bg-surface-container-low h-3 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 30%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="font-medium">대인 관계</span>
+<span class="text-on-surface-variant">18%</span>
+</div>
+<div class="w-full bg-surface-container-low h-3 rounded-full overflow-hidden">
+<div class="bg-outline-variant h-full rounded-full" style="width: 18%;"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Horizontal Bars: Emotions -->
+<section class="bg-surface-container-lowest p-8 rounded-3xl">
+<h3 class="text-lg font-bold mb-6">동반된 감정</h3>
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<span class="text-2xl">🫠</span>
+<div class="flex-1">
+<div class="flex justify-between text-xs mb-1">
+<span class="font-medium">피로감</span>
+<span class="text-on-surface-variant">12회</span>
+</div>
+<div class="w-full bg-surface-container-low h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 80%;"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-2xl">😰</span>
+<div class="flex-1">
+<div class="flex justify-between text-xs mb-1">
+<span class="font-medium">불안감</span>
+<span class="text-on-surface-variant">8회</span>
+</div>
+<div class="w-full bg-surface-container-low h-2 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 55%;"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-2xl">😶‍🌫️</span>
+<div class="flex-1">
+<div class="flex justify-between text-xs mb-1">
+<span class="font-medium">무력감</span>
+<span class="text-on-surface-variant">5회</span>
+</div>
+<div class="w-full bg-surface-container-low h-2 rounded-full overflow-hidden">
+<div class="bg-outline-variant h-full rounded-full" style="width: 35%;"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Triggers (Full Width on Mobile) -->
+<section class="col-span-1 md:col-span-2 bg-surface-container-low p-8 rounded-3xl">
+<h3 class="text-lg font-bold mb-6">주요 트리거</h3>
+<div class="flex flex-wrap gap-3">
+<span class="px-5 py-2.5 bg-surface-container-lowest text-primary font-semibold rounded-2xl shadow-sm text-sm">#오전 10시</span>
+<span class="px-5 py-2.5 bg-surface-container-lowest text-on-surface-variant font-medium rounded-2xl text-sm">#스마트폰</span>
+<span class="px-5 py-2.5 bg-surface-container-lowest text-on-surface-variant font-medium rounded-2xl text-sm">#침대 위</span>
+<span class="px-5 py-2.5 bg-surface-container-lowest text-on-surface-variant font-medium rounded-2xl text-sm">#메일함</span>
+<span class="px-5 py-2.5 bg-surface-container-lowest text-on-surface-variant font-medium rounded-2xl text-sm">#날씨 흐림</span>
+</div>
+</section>
+<!-- Insight Card (Signature Component) -->
+<section class="col-span-1 md:col-span-2 relative group overflow-hidden bg-primary p-8 rounded-3xl shadow-[0_20px_50px_rgba(0,106,99,0.2)]">
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-[#55d2c6]/20 rounded-full blur-3xl group-hover:scale-125 transition-transform duration-700"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-white/80 font-bold tracking-widest text-xs uppercase">Curator's Advice</span>
+</div>
+<h3 class="text-2xl font-bold text-white mb-4 leading-tight">"오전 10시의 피로감이<br/>당신의 성장을 잠시 늦추고 있네요."</h3>
+<p class="text-white/80 leading-relaxed mb-6">
+                        기록된 데이터에 따르면, 당신의 변명은 주로 업무 시작 직후 집중력이 흐트러질 때 발생합니다. 내일은 오전 10시에 5분간의 의도적인 스트레칭을 루틴에 추가해보는 건 어떨까요?
+                    </p>
+<button class="bg-white text-primary px-8 py-3 rounded-full font-bold text-sm shadow-xl active:scale-95 transition-transform">
+                        실천 플랜 설정하기
+                    </button>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-6 pb-6 pt-3 bg-white shadow-[0_-8px_30px_rgba(0,0,0,0.04)] rounded-t-3xl z-50">
+<a class="flex flex-col items-center justify-center text-slate-400 p-3 hover:text-[#55d2c6] transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 p-3 hover:text-[#55d2c6] transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#55d2c6]/10 text-[#006a63] rounded-2xl p-3 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="analytics" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 p-3 hover:text-[#55d2c6] transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</a>
+</nav>
+</body></html>

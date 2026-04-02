@@ -8,6 +8,7 @@ import type {
   UpdateRecordRequest,
   PageResponse,
   PatternReportResponse,
+  UserProfile,
   ApiError,
 } from '../types';
 
@@ -104,6 +105,17 @@ export class ApiClient {
   // 기록 삭제
   async deleteRecord(id: number): Promise<void> {
     await this.client.delete(`/records/${id}`);
+  }
+
+  // 내 프로필 조회
+  async getMe(): Promise<UserProfile> {
+    const { data } = await this.client.get<UserProfile>('/auth/me');
+    return data;
+  }
+
+  // 닉네임 수정
+  async updateDisplayName(displayName: string): Promise<void> {
+    await this.client.patch('/auth/me', { displayName });
   }
 
   // 패턴 리포트 조회

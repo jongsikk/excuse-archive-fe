@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>변명아카이브 - 기록 작성</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed": "#7df6e9",
+              "on-error": "#ffffff",
+              "inverse-surface": "#2d3135",
+              "on-primary-fixed-variant": "#00504a",
+              "error": "#ba1a1a",
+              "surface-tint": "#006a63",
+              "tertiary": "#8d4f10",
+              "on-tertiary-fixed": "#2f1500",
+              "on-error-container": "#93000a",
+              "error-container": "#ffdad6",
+              "on-primary-fixed": "#00201d",
+              "surface": "#f7f9fe",
+              "on-primary-container": "#005851",
+              "on-secondary": "#ffffff",
+              "on-secondary-fixed": "#0b1c30",
+              "surface-container-high": "#e6e8ed",
+              "on-secondary-container": "#54647a",
+              "surface-container": "#eceef3",
+              "on-surface": "#181c20",
+              "outline": "#6c7a77",
+              "on-surface-variant": "#3d4947",
+              "on-primary": "#ffffff",
+              "background": "#f7f9fe",
+              "tertiary-fixed-dim": "#ffb77d",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-fixed-variant": "#6e3900",
+              "inverse-on-surface": "#eff1f6",
+              "surface-variant": "#e0e2e7",
+              "primary": "#006a63",
+              "tertiary-fixed": "#ffdcc3",
+              "outline-variant": "#bcc9c6",
+              "inverse-primary": "#5edacd",
+              "primary-container": "#55d2c6",
+              "surface-container-low": "#f1f4f9",
+              "secondary-fixed-dim": "#b7c8e1",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#783f00",
+              "surface-bright": "#f7f9fe",
+              "secondary-container": "#d0e1fb",
+              "on-background": "#181c20",
+              "tertiary-container": "#ffad68",
+              "primary-fixed-dim": "#5edacd",
+              "secondary": "#505f76",
+              "surface-container-highest": "#e0e2e7",
+              "secondary-fixed": "#d3e4fe",
+              "on-secondary-fixed-variant": "#38485d",
+              "surface-dim": "#d8dadf"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl shadow-[0_12px_40px_rgba(24,28,32,0.06)] flex justify-between items-center px-4 h-16">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[#006a63]">arrow_back</span>
+</button>
+<h1 class="font-headline font-bold tracking-tight text-lg text-[#006a63]">기록 작성</h1>
+</div>
+<div class="bg-surface-container-high px-3 py-1 rounded-full">
+<span class="font-label text-xs font-semibold text-on-surface-variant">Step 1/3</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center text-slate-500 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-2xl mx-auto min-h-screen">
+<!-- Editorial Header -->
+<section class="mb-10">
+<h2 class="font-headline text-3xl font-extrabold tracking-tight mb-2 bg-gradient-to-br from-on-surface to-on-surface-variant bg-clip-text text-transparent">
+                사건의 아카이빙
+            </h2>
+<p class="text-on-surface-variant leading-relaxed opacity-80">
+                일어난 일을 객관적으로 기록하고, 당신의 대처를 보관하세요. 이 기록은 미래의 당신을 위한 변론서가 됩니다.
+            </p>
+</section>
+<!-- Form Sections (Asymmetric Layout) -->
+<form class="space-y-8">
+<!-- Situation Section -->
+<div class="space-y-3">
+<label class="flex items-center gap-2 font-headline font-bold text-sm tracking-wide text-primary uppercase ml-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                    Situation (상황)
+                </label>
+<div class="relative group">
+<textarea class="w-full min-h-[160px] bg-surface-container-low border-none rounded-xl p-6 text-on-surface placeholder:text-on-surface-variant/40 focus:ring-2 focus:ring-primary/30 focus:bg-surface-container-lowest transition-all duration-300 shadow-sm" placeholder="어떤 일이 발생했나요? 날짜, 시간, 장소를 포함해 구체적으로 적어주세요."></textarea>
+<div class="absolute inset-0 rounded-xl border border-outline-variant/15 pointer-events-none group-focus-within:border-primary/30 transition-colors"></div>
+</div>
+</div>
+<!-- Action Section -->
+<div class="space-y-3 pl-0 md:pl-8">
+<label class="flex items-center gap-2 font-headline font-bold text-sm tracking-wide text-primary uppercase ml-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                    Action (대처)
+                </label>
+<div class="relative group">
+<textarea class="w-full min-h-[160px] bg-surface-container-low border-none rounded-xl p-6 text-on-surface placeholder:text-on-surface-variant/40 focus:ring-2 focus:ring-primary/30 focus:bg-surface-container-lowest transition-all duration-300 shadow-sm" placeholder="당신은 어떻게 행동했나요? 그 순간의 판단과 실행 내용을 기록합니다."></textarea>
+<div class="absolute inset-0 rounded-xl border border-outline-variant/15 pointer-events-none group-focus-within:border-primary/30 transition-colors"></div>
+</div>
+</div>
+<!-- Result Section -->
+<div class="space-y-3">
+<label class="flex items-center gap-2 font-headline font-bold text-sm tracking-wide text-primary uppercase ml-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                    Result (결과)
+                </label>
+<div class="relative group">
+<textarea class="w-full min-h-[160px] bg-surface-container-low border-none rounded-xl p-6 text-on-surface placeholder:text-on-surface-variant/40 focus:ring-2 focus:ring-primary/30 focus:bg-surface-container-lowest transition-all duration-300 shadow-sm" placeholder="최종적으로 어떤 결과가 나왔나요? 상대방의 반응이나 상황의 종료 상태를 적어주세요."></textarea>
+<div class="absolute inset-0 rounded-xl border border-outline-variant/15 pointer-events-none group-focus-within:border-primary/30 transition-colors"></div>
+</div>
+</div>
+</form>
+<!-- Signature Texture: Reflective Tip Card -->
+<div class="mt-12 p-6 rounded-xl bg-surface-container-high relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl">edit_note</span>
+</div>
+<div class="relative z-10">
+<h4 class="font-headline font-bold text-on-surface mb-1">작성 팁</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">감정적인 서술보다는 관찰 가능한 사실 위주로 기록할 때 아카이브의 신뢰도가 높아집니다.</p>
+</div>
+</div>
+</main>
+<!-- Fixed Bottom Action Row -->
+<footer class="fixed bottom-0 left-0 w-full bg-white/80 backdrop-blur-xl px-6 py-6 flex gap-4 items-center justify-between shadow-[0_-8px_30px_rgba(0,0,0,0.04)] border-t border-surface-container-high md:px-32 lg:px-64">
+<button class="flex-1 py-4 px-6 rounded-full font-label font-semibold text-on-surface bg-surface-container-high hover:bg-surface-container-highest transition-colors active:scale-95 duration-200">
+            Cancel
+        </button>
+<button class="flex-[2] py-4 px-6 rounded-full font-label font-semibold text-white bg-gradient-to-br from-[#006a63] to-[#55d2c6] shadow-lg shadow-primary/20 hover:opacity-90 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2">
+<span>Next Step</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</footer>
+<!-- Suppressed BottomNavBar for transactional focus -->
+</body></html>

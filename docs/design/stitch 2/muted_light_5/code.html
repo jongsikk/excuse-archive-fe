@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-tertiary-fixed": "#084155",
+            "tertiary-fixed": "#b4e4fc",
+            "on-secondary": "#e2fffb",
+            "surface-tint": "#2e6863",
+            "secondary-container": "#cce8e4",
+            "on-primary-fixed": "#014843",
+            "on-tertiary": "#f3faff",
+            "primary-container": "#b3eee7",
+            "error-container": "#fa746f",
+            "inverse-surface": "#0b0f12",
+            "on-error-container": "#6e0a12",
+            "inverse-primary": "#bbf6ef",
+            "surface-container-lowest": "#ffffff",
+            "on-background": "#2c333a",
+            "primary": "#2e6863",
+            "on-primary-container": "#1f5b56",
+            "primary-dim": "#205c57",
+            "surface-dim": "#d3dbe4",
+            "error-dim": "#67040d",
+            "tertiary-dim": "#28596d",
+            "on-tertiary-fixed-variant": "#2e5d72",
+            "surface-container-high": "#e3e9f1",
+            "surface": "#f7f9fe",
+            "background": "#f7f9fe",
+            "on-tertiary-container": "#235468",
+            "tertiary": "#36657a",
+            "surface-container-low": "#f0f4fa",
+            "tertiary-container": "#b4e4fc",
+            "secondary-fixed": "#cce8e4",
+            "inverse-on-surface": "#9a9da2",
+            "on-secondary-container": "#3d5654",
+            "surface-container": "#e9eef6",
+            "tertiary-fixed-dim": "#a7d5ee",
+            "on-surface": "#2c333a",
+            "on-primary": "#e1fffb",
+            "surface-variant": "#dce3ed",
+            "surface-container-highest": "#dce3ed",
+            "on-secondary-fixed": "#2b4441",
+            "surface-bright": "#f7f9fe",
+            "on-error": "#fff7f6",
+            "on-primary-fixed-variant": "#2a6560",
+            "primary-fixed-dim": "#a5dfd9",
+            "on-surface-variant": "#586068",
+            "primary-fixed": "#b3eee7",
+            "outline": "#747b84",
+            "error": "#a83836",
+            "secondary-dim": "#3f5855",
+            "outline-variant": "#abb3bc",
+            "secondary": "#4a6461",
+            "on-secondary-fixed-variant": "#47605d",
+            "secondary-fixed-dim": "#bedad6"
+          },
+          fontFamily: {
+            "headline": ["Manrope"],
+            "body": ["Manrope"],
+            "label": ["Manrope"]
+          },
+          borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    body { font-family: 'Manrope', sans-serif; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-[#f7f9fe] dark:bg-slate-950 flex justify-between items-center w-full px-6 h-16 fixed top-0 z-50">
+<button class="text-[#2e6863] dark:text-[#76AFA9] hover:opacity-80 transition-opacity duration-300 cubic-bezier(0.2, 0, 0, 1) transition-all">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="Manrope display-sm uppercase tracking-[0.05em] font-bold text-[#2e6863] dark:text-[#76AFA9]">EXCUSE ARCHIVE</h1>
+<button class="text-[#2e6863] dark:text-[#76AFA9] hover:opacity-80 transition-opacity duration-300 cubic-bezier(0.2, 0, 0, 1) transition-all">
+<span class="material-symbols-outlined">search</span>
+</button>
+</header>
+<main class="pt-20 px-6 max-w-4xl mx-auto space-y-12">
+<!-- Screen Title & Date Picker -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="space-y-1">
+<span class="label-md uppercase tracking-[0.05em] text-on-surface-variant font-semibold">Analytical Dashboard</span>
+<h2 class="text-[2.5rem] leading-tight font-extrabold tracking-tight text-on-surface">Pattern Report</h2>
+</div>
+<div class="bg-surface-container-low px-4 py-3 rounded-xl flex items-center gap-3 cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary">calendar_today</span>
+<span class="text-sm font-medium text-on-surface-variant">Oct 01 — Oct 31, 2023</span>
+<span class="material-symbols-outlined text-outline-variant text-sm">expand_more</span>
+</div>
+</section>
+<!-- Daily Intensity Chart (Asymmetric Card) -->
+<section class="bg-surface-container-lowest rounded-xl p-8 shadow-[0_8px_40px_rgba(44,51,58,0.04)]">
+<div class="flex justify-between items-start mb-10">
+<div>
+<h3 class="text-xl font-bold text-on-surface">Daily Intensity</h3>
+<p class="text-sm text-on-surface-variant">Frequency of evasive behaviors over time</p>
+</div>
+<span class="bg-secondary-container text-on-secondary-container text-xs font-bold px-3 py-1 rounded-full">+12% vs last month</span>
+</div>
+<!-- Bar Chart Visualization -->
+<div class="flex items-end justify-between h-48 gap-2 px-2">
+<!-- 31 days simplified to 14 data points for clean editorial look -->
+<div class="group relative flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/40 rounded-t-lg h-[40%] transition-all duration-500 group-hover:bg-primary"></div>
+<span class="text-[10px] text-outline font-medium">01</span>
+</div>
+<div class="group relative flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/40 rounded-t-lg h-[65%] transition-all duration-500 group-hover:bg-primary"></div>
+<span class="text-[10px] text-outline font-medium">03</span>
+</div>
+<div class="group relative flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/40 rounded-t-lg h-[30%] transition-all duration-500 group-hover:bg-primary"></div>
+<span class="text-[10px] text-outline font-medium">05</span>
+</div>
+<div class="group relative flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary rounded-t-lg h-[85%]"></div>
+<span class="text-[10px] text-outline font-medium">07</span>
+</div>
+<div class="group relative flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/40 rounded-t-lg h-[45%] transition-all duration-500 group-hover:bg-primary"></div>
+<span class="text-[10px] text-outline font-medium">09</span>
+</div>
+<div class="group relative flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/40 rounded-t-lg h-[20%] transition-all duration-500 group-hover:bg-primary"></div>
+<span class="text-[10px] text-outline font-medium">11</span>
+</div>
+<div class="group relative flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/40 rounded-t-lg h-[55%] transition-all duration-500 group-hover:bg-primary"></div>
+<span class="text-[10px] text-outline font-medium">13</span>
+</div>
+<div class="group relative flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/40 rounded-t-lg h-[95%] transition-all duration-500 group-hover:bg-primary"></div>
+<span class="text-[10px] text-outline font-medium">15</span>
+</div>
+<div class="group relative flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/40 rounded-t-lg h-[60%] transition-all duration-500 group-hover:bg-primary"></div>
+<span class="text-[10px] text-outline font-medium">17</span>
+</div>
+<div class="group relative flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/40 rounded-t-lg h-[40%] transition-all duration-500 group-hover:bg-primary"></div>
+<span class="text-[10px] text-outline font-medium">19</span>
+</div>
+<div class="group relative flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/40 rounded-t-lg h-[75%] transition-all duration-500 group-hover:bg-primary"></div>
+<span class="text-[10px] text-outline font-medium">21</span>
+</div>
+<div class="group relative flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/40 rounded-t-lg h-[35%] transition-all duration-500 group-hover:bg-primary"></div>
+<span class="text-[10px] text-outline font-medium">23</span>
+</div>
+<div class="group relative flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/40 rounded-t-lg h-[50%] transition-all duration-500 group-hover:bg-primary"></div>
+<span class="text-[10px] text-outline font-medium">25</span>
+</div>
+<div class="group relative flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/40 rounded-t-lg h-[25%] transition-all duration-500 group-hover:bg-primary"></div>
+<span class="text-[10px] text-outline font-medium">27</span>
+</div>
+</div>
+</section>
+<!-- Categories & Emotions Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Top Categories -->
+<div class="md:col-span-7 bg-surface-container-low rounded-xl p-8">
+<h3 class="text-lg font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span>
+          Top Categories
+        </h3>
+<div class="space-y-5">
+<div class="space-y-2">
+<div class="flex justify-between text-sm">
+<span class="font-semibold">Professional Burnout</span>
+<span class="text-on-surface-variant">42%</span>
+</div>
+<div class="h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[42%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm">
+<span class="font-semibold">Social Fatigue</span>
+<span class="text-on-surface-variant">28%</span>
+</div>
+<div class="h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary/70 w-[28%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm">
+<span class="font-semibold">Procrastination</span>
+<span class="text-on-surface-variant">20%</span>
+</div>
+<div class="h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary/40 w-[20%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm">
+<span class="font-semibold">Physical Health</span>
+<span class="text-on-surface-variant">10%</span>
+</div>
+<div class="h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary/20 w-[10%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Common Emotions -->
+<div class="md:col-span-5 bg-primary-container/30 rounded-xl p-8 flex flex-col">
+<h3 class="text-lg font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">sentiment_neutral</span>
+          Core Emotions
+        </h3>
+<div class="flex flex-wrap gap-2">
+<span class="bg-white px-4 py-2 rounded-full text-xs font-bold text-primary shadow-sm">GUILT</span>
+<span class="bg-white/60 px-4 py-2 rounded-full text-xs font-bold text-on-surface-variant">RELIEF</span>
+<span class="bg-white/60 px-4 py-2 rounded-full text-xs font-bold text-on-surface-variant">ANXIETY</span>
+<span class="bg-white/80 px-4 py-2 rounded-full text-xs font-bold text-primary-dim">DREAD</span>
+<span class="bg-white px-4 py-2 rounded-full text-xs font-bold text-primary shadow-sm">EXHAUSTION</span>
+<span class="bg-white/40 px-4 py-2 rounded-full text-xs font-bold text-outline">STRESS</span>
+</div>
+<div class="mt-auto pt-6 border-t border-primary/10">
+<p class="text-sm italic text-on-primary-container">"Guilt remains the primary driver for 60% of your professional-themed excuses this month."</p>
+</div>
+</div>
+</section>
+<!-- Curator Advice Card -->
+<section class="relative overflow-hidden bg-on-background rounded-[2rem] p-8 md:p-12 text-surface-container-lowest">
+<div class="relative z-10 max-w-lg">
+<span class="inline-block bg-primary px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase mb-4">Curator's insight</span>
+<h3 class="text-3xl font-bold mb-4">Honesty as a Radical Strategy</h3>
+<p class="text-surface-container-high leading-relaxed mb-8 opacity-80">
+          Your data shows a significant spike in 'Work' excuses on Tuesday mornings. This pattern suggests a recurring conflict that might be better solved with a boundary than a fabrication. Try 'I need focused deep-work time' instead of 'The WiFi is down.'
+        </p>
+<button class="bg-primary hover:bg-primary-dim text-surface-container-lowest px-8 py-4 rounded-xl font-bold text-sm transition-all cubic-bezier(0.2, 0, 0, 1)">
+          Apply This Insight
+        </button>
+</div>
+<!-- Abstract Decorative Element -->
+<div class="absolute right-0 top-0 w-1/3 h-full bg-gradient-to-br from-primary/30 to-transparent blur-3xl -z-0"></div>
+<div class="absolute -right-20 -bottom-20 w-80 h-80 bg-primary/20 rounded-full blur-3xl"></div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-[0_-8px_40px_rgba(44,51,58,0.06)] rounded-t-[24px]">
+<a class="flex flex-col items-center justify-center text-[#586068] dark:text-slate-500 p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-transform scale-95 cubic-bezier(0.2, 0, 0, 1)" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#cce8e4] dark:bg-[#2e6863]/30 text-[#2e6863] dark:text-[#b3eee7] rounded-full p-3 transition-transform scale-95 cubic-bezier(0.2, 0, 0, 1)" href="#">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#586068] dark:text-slate-500 p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-transform scale-95 cubic-bezier(0.2, 0, 0, 1)" href="#">
+<span class="material-symbols-outlined" data-icon="bookmarks">bookmarks</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#586068] dark:text-slate-500 p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-transform scale-95 cubic-bezier(0.2, 0, 0, 1)" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</a>
+</nav>
+</body></html>

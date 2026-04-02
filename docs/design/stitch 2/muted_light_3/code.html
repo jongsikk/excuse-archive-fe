@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Excuse Archive - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-fixed": "#084155",
+              "tertiary-fixed": "#b4e4fc",
+              "on-secondary": "#e2fffb",
+              "surface-tint": "#2e6863",
+              "secondary-container": "#cce8e4",
+              "on-primary-fixed": "#014843",
+              "on-tertiary": "#f3faff",
+              "primary-container": "#b3eee7",
+              "error-container": "#fa746f",
+              "inverse-surface": "#0b0f12",
+              "on-error-container": "#6e0a12",
+              "inverse-primary": "#bbf6ef",
+              "surface-container-lowest": "#ffffff",
+              "on-background": "#2c333a",
+              "primary": "#2e6863",
+              "on-primary-container": "#1f5b56",
+              "primary-dim": "#205c57",
+              "surface-dim": "#d3dbe4",
+              "error-dim": "#67040d",
+              "tertiary-dim": "#28596d",
+              "on-tertiary-fixed-variant": "#2e5d72",
+              "surface-container-high": "#e3e9f1",
+              "surface": "#f7f9fe",
+              "background": "#f7f9fe",
+              "on-tertiary-container": "#235468",
+              "tertiary": "#36657a",
+              "surface-container-low": "#f0f4fa",
+              "tertiary-container": "#b4e4fc",
+              "secondary-fixed": "#cce8e4",
+              "inverse-on-surface": "#9a9da2",
+              "on-secondary-container": "#3d5654",
+              "surface-container": "#e9eef6",
+              "tertiary-fixed-dim": "#a7d5ee",
+              "on-surface": "#2c333a",
+              "on-primary": "#e1fffb",
+              "surface-variant": "#dce3ed",
+              "surface-container-highest": "#dce3ed",
+              "on-secondary-fixed": "#2b4441",
+              "surface-bright": "#f7f9fe",
+              "on-error": "#fff7f6",
+              "on-primary-fixed-variant": "#2a6560",
+              "primary-fixed-dim": "#a5dfd9",
+              "on-surface-variant": "#586068",
+              "primary-fixed": "#b3eee7",
+              "outline": "#747b84",
+              "error": "#a83836",
+              "secondary-dim": "#3f5855",
+              "outline-variant": "#abb3bc",
+              "secondary": "#4a6461",
+              "on-secondary-fixed-variant": "#47605d",
+              "secondary-fixed-dim": "#bedad6"
+            },
+            fontFamily: {
+              "headline": ["Manrope", "sans-serif"],
+              "body": ["Manrope", "sans-serif"],
+              "label": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation -->
+<header class="fixed top-0 left-0 w-full z-50 bg-[#f7f9fe] dark:bg-slate-950 flex justify-between items-center px-6 h-16">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#2e6863] cursor-pointer hover:opacity-80 transition-opacity duration-300">menu</span>
+<h1 class="text-lg font-bold tracking-widest text-[#2e6863] dark:text-[#76AFA9] Manrope display-sm uppercase tracking-[0.05em] font-bold">EXCUSE ARCHIVE</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#2e6863] cursor-pointer hover:opacity-80 transition-opacity duration-300">search</span>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-5xl mx-auto">
+<!-- Welcome Section -->
+<section class="mb-12">
+<p class="text-sm font-label uppercase tracking-[0.1em] text-on-surface-variant mb-2">Good morning, Julian</p>
+<h2 class="text-4xl font-headline font-extrabold text-on-surface tracking-tight mb-8">Ready to curate your day?</h2>
+<!-- Streak Banner -->
+<div class="relative overflow-hidden rounded-xl p-8 bg-gradient-to-br from-[#fdf2e9] to-[#fae5d3] shadow-[0_8px_40px_rgba(44,51,58,0.04)] flex items-center justify-between group">
+<div class="relative z-10">
+<h3 class="text-sm font-label uppercase tracking-widest text-[#935b3e] mb-2">Consistency Streak</h3>
+<div class="flex items-baseline gap-2">
+<span class="text-5xl font-extrabold text-[#784628]">12</span>
+<span class="text-lg font-medium text-[#784628]/80">Days Active</span>
+</div>
+</div>
+<div class="relative z-10 hidden md:block">
+<span class="material-symbols-outlined text-6xl text-[#784628]/20" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<!-- Subtle Gradient Decoration -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-white/20 to-transparent rounded-full -mr-24 -mt-24"></div>
+</div>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Weekly Stats (Bento Large) -->
+<div class="md:col-span-8 bg-surface-container-lowest rounded-xl p-8 shadow-[0_8px_40px_rgba(44,51,58,0.04)] flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-center mb-10">
+<h4 class="text-lg font-bold text-on-surface">Weekly Archive Load</h4>
+<span class="text-xs font-label uppercase tracking-widest text-primary">+14% vs last week</span>
+</div>
+<div class="flex items-end justify-between h-48 gap-4 px-2">
+<!-- Bar chart elements with muted primary -->
+<div class="flex-1 flex flex-col items-center gap-3">
+<div class="w-full bg-surface-container-low rounded-t-lg transition-all duration-700" style="height: 40%"></div>
+<span class="text-[10px] font-label text-on-surface-variant uppercase">Mon</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-3">
+<div class="w-full bg-surface-container-low rounded-t-lg transition-all duration-700" style="height: 65%"></div>
+<span class="text-[10px] font-label text-on-surface-variant uppercase">Tue</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-3">
+<div class="w-full bg-primary-container rounded-t-lg transition-all duration-700" style="height: 85%"></div>
+<span class="text-[10px] font-label text-on-surface-variant uppercase">Wed</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-3">
+<div class="w-full bg-surface-container-low rounded-t-lg transition-all duration-700" style="height: 50%"></div>
+<span class="text-[10px] font-label text-on-surface-variant uppercase">Thu</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-3">
+<div class="w-full bg-primary/20 rounded-t-lg transition-all duration-700" style="height: 30%"></div>
+<span class="text-[10px] font-label text-on-surface-variant uppercase">Fri</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-3">
+<div class="w-full bg-surface-container-low rounded-t-lg transition-all duration-700" style="height: 20%"></div>
+<span class="text-[10px] font-label text-on-surface-variant uppercase">Sat</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-3">
+<div class="w-full bg-surface-container-low rounded-t-lg transition-all duration-700" style="height: 15%"></div>
+<span class="text-[10px] font-label text-on-surface-variant uppercase">Sun</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Heatmap / Small Summary (Bento Small) -->
+<div class="md:col-span-4 bg-surface-container-lowest rounded-xl p-8 shadow-[0_8px_40px_rgba(44,51,58,0.04)]">
+<h4 class="text-lg font-bold text-on-surface mb-6">Activity Heatmap</h4>
+<div class="grid grid-cols-7 gap-1.5 mb-8">
+<!-- 28 Heatmap cells -->
+<div class="aspect-square bg-surface-container-low rounded-[4px]"></div>
+<div class="aspect-square bg-primary-container rounded-[4px]"></div>
+<div class="aspect-square bg-surface-container-low rounded-[4px]"></div>
+<div class="aspect-square bg-secondary-container rounded-[4px]"></div>
+<div class="aspect-square bg-surface-container-low rounded-[4px]"></div>
+<div class="aspect-square bg-primary-container rounded-[4px]"></div>
+<div class="aspect-square bg-primary rounded-[4px]"></div>
+<div class="aspect-square bg-surface-container-low rounded-[4px]"></div>
+<div class="aspect-square bg-surface-container-low rounded-[4px]"></div>
+<div class="aspect-square bg-secondary-container rounded-[4px]"></div>
+<div class="aspect-square bg-surface-container-low rounded-[4px]"></div>
+<div class="aspect-square bg-primary-container rounded-[4px]"></div>
+<div class="aspect-square bg-surface-container-low rounded-[4px]"></div>
+<div class="aspect-square bg-surface-container-low rounded-[4px]"></div>
+<div class="aspect-square bg-surface-container-low rounded-[4px]"></div>
+<div class="aspect-square bg-surface-container-low rounded-[4px]"></div>
+<div class="aspect-square bg-primary-container rounded-[4px]"></div>
+<div class="aspect-square bg-surface-container-low rounded-[4px]"></div>
+<div class="aspect-square bg-surface-container-low rounded-[4px]"></div>
+<div class="aspect-square bg-secondary-container rounded-[4px]"></div>
+<div class="aspect-square bg-primary-container rounded-[4px]"></div>
+<div class="aspect-square bg-primary-container rounded-[4px]"></div>
+<div class="aspect-square bg-surface-container-low rounded-[4px]"></div>
+<div class="aspect-square bg-surface-container-low rounded-[4px]"></div>
+<div class="aspect-square bg-surface-container-low rounded-[4px]"></div>
+<div class="aspect-square bg-secondary-container rounded-[4px]"></div>
+<div class="aspect-square bg-primary rounded-[4px]"></div>
+<div class="aspect-square bg-primary-container rounded-[4px]"></div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Archived Today</span>
+<span class="font-bold text-on-surface">04</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Top Category</span>
+<span class="text-xs font-label uppercase text-[#2e6863] bg-[#cce8e4] px-2 py-0.5 rounded-full">Social</span>
+</div>
+</div>
+</div>
+<!-- Recent Records Section -->
+<div class="md:col-span-12 mt-4">
+<div class="flex justify-between items-center mb-8">
+<h3 class="text-2xl font-headline font-bold text-on-surface">Recent Submissions</h3>
+<button class="text-sm font-medium text-primary flex items-center gap-1 group">
+                        View full archive 
+                        <span class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Record Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_8px_40px_rgba(44,51,58,0.04)] hover:shadow-[0_12px_48px_rgba(44,51,58,0.08)] transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="h-12 w-12 rounded-xl bg-surface-container-low flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">work</span>
+</div>
+<span class="text-[10px] font-label text-on-surface-variant">2H AGO</span>
+</div>
+<h5 class="text-lg font-bold text-on-surface mb-2">Unexpected Tech Issue</h5>
+<p class="text-sm text-on-surface-variant line-clamp-2 mb-6">"My internet connection was unstable during the sync, causing a delay in the delivery..."</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-surface-container-low text-on-surface-variant text-[10px] font-label uppercase rounded">Work</span>
+<span class="px-2 py-1 bg-surface-container-low text-on-surface-variant text-[10px] font-label uppercase rounded">Technical</span>
+</div>
+</div>
+<!-- Record Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_8px_40px_rgba(44,51,58,0.04)] hover:shadow-[0_12px_48px_rgba(44,51,58,0.08)] transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="h-12 w-12 rounded-xl bg-surface-container-low flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">diversity_3</span>
+</div>
+<span class="text-[10px] font-label text-on-surface-variant">6H AGO</span>
+</div>
+<h5 class="text-lg font-bold text-on-surface mb-2">Family Commitment</h5>
+<p class="text-sm text-on-surface-variant line-clamp-2 mb-6">"Needed to assist my sibling with a last-minute appointment across town tonight..."</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-surface-container-low text-on-surface-variant text-[10px] font-label uppercase rounded">Social</span>
+</div>
+</div>
+<!-- Record Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_8px_40px_rgba(44,51,58,0.04)] hover:shadow-[0_12px_48px_rgba(44,51,58,0.08)] transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="h-12 w-12 rounded-xl bg-surface-container-low flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">fitness_center</span>
+</div>
+<span class="text-[10px] font-label text-on-surface-variant">YESTERDAY</span>
+</div>
+<h5 class="text-lg font-bold text-on-surface mb-2">Recharging Phase</h5>
+<p class="text-sm text-on-surface-variant line-clamp-2 mb-6">"Prioritizing mental wellness after a high-output sprint earlier this morning..."</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-surface-container-low text-on-surface-variant text-[10px] font-label uppercase rounded">Wellness</span>
+<span class="px-2 py-1 bg-surface-container-low text-on-surface-variant text-[10px] font-label uppercase rounded">Personal</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-t-[24px] shadow-[0_-8px_40px_rgba(44,51,58,0.06)]">
+<a class="flex flex-col items-center justify-center bg-[#cce8e4] dark:bg-[#2e6863]/30 text-[#2e6863] dark:text-[#b3eee7] rounded-full p-3 transition-transform duration-300 scale-95" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#586068] dark:text-slate-500 p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-transform duration-300 scale-95" href="#">
+<span class="material-symbols-outlined">history_edu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#586068] dark:text-slate-500 p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-transform duration-300 scale-95" href="#">
+<span class="material-symbols-outlined">bookmarks</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#586068] dark:text-slate-500 p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-transform duration-300 scale-95" href="#">
+<span class="material-symbols-outlined">settings</span>
+</a>
+</nav>
+<!-- FAB (Conditional logic: Render on Home screen for main action) -->
+<div class="fixed right-6 bottom-24 z-40">
+<button class="bg-[#2e6863] text-[#e1fffb] h-14 w-14 rounded-full flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all duration-300">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</body></html>
