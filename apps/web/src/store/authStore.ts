@@ -5,6 +5,7 @@ interface AuthState {
   token: string | null;
   externalId: string | null;
   isLoading: boolean;
+  initialized: boolean;
   error: string | null;
   initializeAuth: () => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
@@ -19,14 +20,13 @@ export const useAuthStore = create<AuthState>((set) => ({
   token: null,
   externalId: null,
   isLoading: false,
+  initialized: false,
   error: null,
 
   initializeAuth: async () => {
     const savedToken = localStorage.getItem(TOKEN_KEY);
     const savedExternalId = localStorage.getItem(EXTERNAL_ID_KEY);
-    if (savedToken) {
-      set({ token: savedToken, externalId: savedExternalId });
-    }
+    set({ token: savedToken ?? null, externalId: savedExternalId ?? null, initialized: true });
   },
 
   login: async (email, password) => {

@@ -50,7 +50,7 @@ export default function LoginPage() {
   const shownError = localError || error;
 
   return (
-    <div className="min-h-screen bg-dark-800 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-page flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         {/* 로고 */}
         <div className="text-center mb-8">
@@ -59,7 +59,7 @@ export default function LoginPage() {
         </div>
 
         {/* 탭 */}
-        <div className="flex bg-dark-700 rounded-xl p-1 mb-6 border border-border/60">
+        <div className="flex bg-card rounded-xl p-1 mb-6 border border-border/60">
           {(['login', 'register'] as Tab[]).map((t) => (
             <button
               key={t}
@@ -78,7 +78,7 @@ export default function LoginPage() {
         </div>
 
         {/* 폼 */}
-        <div className="bg-dark-700 rounded-2xl border border-border/60 p-6">
+        <div className="bg-card rounded-2xl border border-border/60 p-6">
           {tab === 'login' ? (
             <form onSubmit={handleLogin} className="space-y-4">
               <Field label="이메일" type="email" value={email} onChange={setEmail} placeholder="hello@example.com" />
@@ -153,7 +153,7 @@ function Field({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full bg-dark-600 border border-border/60 rounded-xl px-4 py-2.5 text-sm text-text-primary placeholder-text-muted focus:outline-none focus:border-primary-400 transition-colors"
+        className="w-full bg-elevated border border-border/60 rounded-xl px-4 py-2.5 text-sm text-text-primary placeholder-text-muted focus:outline-none focus:border-primary-400 transition-colors"
       />
     </div>
   );

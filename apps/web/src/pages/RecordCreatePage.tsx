@@ -46,7 +46,7 @@ function StepIndicator({ current }: { current: number }) {
                   ? 'bg-primary-500 border-primary-500 text-dark-900'
                   : i === current
                     ? 'bg-primary-500/20 border-primary-500 text-primary-400'
-                    : 'bg-dark-600 border-border/70 text-text-muted'
+                    : 'bg-elevated border-border/70 text-text-muted'
               }`}
             >
               {i < current ? '✓' : i + 1}
@@ -100,7 +100,7 @@ function Textarea({
         onChange={onChange}
         placeholder={placeholder}
         rows={3}
-        className={`w-full px-4 py-3 bg-dark-600 border rounded-xl text-text-primary placeholder-text-muted focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 outline-none resize-none transition-colors ${
+        className={`w-full px-4 py-3 bg-elevated border rounded-xl text-text-primary placeholder-text-muted focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 outline-none resize-none transition-colors ${
           error ? 'border-accent' : 'border-border/75'
         }`}
       />
@@ -207,7 +207,7 @@ export default function RecordCreatePage() {
           ←
         </button>
         <div>
-          <h1 className="text-xl font-bold text-text-primary">새 기록</h1>
+          <h1 className="text-lg font-bold text-text-primary">Crafting the Narrative</h1>
           <p className="text-xs text-text-muted">{STEPS[step].desc}</p>
         </div>
       </div>
@@ -220,7 +220,7 @@ export default function RecordCreatePage() {
         </div>
       )}
 
-      <div className="bg-dark-700 rounded-2xl border border-border/70 p-6 space-y-5">
+      <div className="bg-card rounded-2xl border border-border/60 p-6 space-y-5">
         {/* Step 1: 무슨 일이? */}
         {step === 0 && (
           <>
@@ -231,7 +231,7 @@ export default function RecordCreatePage() {
                 name="occurredAt"
                 value={formData.occurredAt}
                 onChange={handleChange}
-                className="w-full px-4 py-3 bg-dark-600 border border-border/75 rounded-xl text-text-primary focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 outline-none"
+                className="w-full px-4 py-3 bg-elevated border border-border/60 rounded-xl text-text-primary focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 outline-none"
               />
             </div>
             <Textarea
@@ -293,7 +293,7 @@ export default function RecordCreatePage() {
                     className={`px-3 py-1.5 rounded-full text-sm border transition-colors ${
                       formData.mistakeType === type
                         ? 'bg-primary-500/25 border-primary-500/70 text-primary-400'
-                        : 'bg-dark-600 border-border/70 text-text-secondary hover:border-border'
+                        : 'bg-elevated border-border/60 text-text-secondary hover:border-border'
                     }`}
                   >
                     {MISTAKE_TYPE_LABELS[type]}
@@ -318,7 +318,7 @@ export default function RecordCreatePage() {
                     className={`px-3 py-1.5 rounded-full text-sm border transition-colors ${
                       formData.emotion === emotion
                         ? 'bg-purple-500/25 border-purple-500/70 text-purple-400'
-                        : 'bg-dark-600 border-border/70 text-text-secondary hover:border-border'
+                        : 'bg-elevated border-border/60 text-text-secondary hover:border-border'
                     }`}
                   >
                     {EMOTION_LABELS[emotion]}
@@ -377,7 +377,7 @@ export default function RecordCreatePage() {
                 value={formData.recurrenceTrigger}
                 onChange={handleChange}
                 placeholder="예: 회의 직후, 오전 업무 시작"
-                className="w-full px-4 py-3 bg-dark-600 border border-border/75 rounded-xl text-text-primary placeholder-text-muted focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 outline-none"
+                className="w-full px-4 py-3 bg-elevated border border-border/60 rounded-xl text-text-primary placeholder-text-muted focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 outline-none"
               />
             </div>
             <div>
@@ -388,7 +388,7 @@ export default function RecordCreatePage() {
                 value={formData.recurrenceAction}
                 onChange={handleChange}
                 placeholder="예: 타이머 10분 + 미처리 건 1개만"
-                className="w-full px-4 py-3 bg-dark-600 border border-border/75 rounded-xl text-text-primary placeholder-text-muted focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 outline-none"
+                className="w-full px-4 py-3 bg-elevated border border-border/60 rounded-xl text-text-primary placeholder-text-muted focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 outline-none"
               />
             </div>
           </>
@@ -400,7 +400,7 @@ export default function RecordCreatePage() {
         <button
           type="button"
           onClick={handleBack}
-          className="flex-1 px-4 py-3 bg-dark-600 border border-border/75 text-text-secondary rounded-xl font-medium hover:bg-dark-700 transition-colors"
+          className="flex-1 px-4 py-3 bg-elevated border border-border/60 text-text-secondary rounded-xl font-medium hover:bg-card transition-colors"
         >
           {step === 0 ? '취소' : '이전'}
         </button>

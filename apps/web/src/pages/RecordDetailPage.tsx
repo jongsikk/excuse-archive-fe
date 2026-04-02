@@ -35,8 +35,8 @@ export default function RecordDetailPage() {
   if (isLoading) {
     return (
       <div className="space-y-4">
-        <div className="bg-dark-600 h-8 w-48 rounded animate-pulse" />
-        <div className="bg-dark-600 h-64 rounded-2xl animate-pulse" />
+        <div className="bg-elevated h-8 w-48 rounded animate-pulse" />
+        <div className="bg-elevated h-64 rounded-2xl animate-pulse" />
       </div>
     );
   }
@@ -74,9 +74,9 @@ export default function RecordDetailPage() {
       </div>
 
       {/* 기록 내용 */}
-      <div className="bg-dark-700 rounded-2xl border border-border/70 overflow-hidden">
+      <div className="bg-card rounded-2xl border border-border/60 overflow-hidden">
         {/* 메타 정보 */}
-        <div className="px-6 py-4 border-b border-border/50 bg-dark-600/50">
+        <div className="px-6 py-4 border-b border-border/50 bg-elevated/50">
           <div className="flex items-center justify-between flex-wrap gap-2">
             <div className="flex items-center gap-2">
               {record.mistakeType && (
@@ -90,7 +90,7 @@ export default function RecordDetailPage() {
                 </span>
               )}
               {record.intensityLevel && (
-                <span className="px-3 py-1 bg-dark-600 text-text-secondary text-xs rounded-full border border-border/70">
+                <span className="px-3 py-1 bg-elevated text-text-secondary text-xs rounded-full border border-border/70">
                   강도 {record.intensityLevel}/5
                 </span>
               )}
@@ -142,7 +142,7 @@ export default function RecordDetailPage() {
                 className={`flex-shrink-0 px-4 py-2 rounded-xl text-sm font-medium transition-colors border ${
                   record.nextActionDone
                     ? 'bg-primary-500/25 border-primary-500/70 text-primary-400'
-                    : 'bg-dark-600 border-border/75 text-text-secondary hover:border-border'
+                    : 'bg-elevated border-border/60 text-text-secondary hover:border-border'
                 }`}
               >
                 {record.nextActionDone ? '완료됨 ✓' : '완료하기'}
@@ -175,8 +175,8 @@ export default function RecordDetailPage() {
 
       {/* 삭제 확인 모달 */}
       {showDeleteModal && (
-        <div className="fixed inset-0 bg-dark-900/80 flex items-center justify-center z-50">
-          <div className="bg-dark-700 rounded-2xl border border-border/70 p-6 max-w-sm mx-4">
+        <div className="fixed inset-0 bg-overlay/80 flex items-center justify-center z-50">
+          <div className="bg-card rounded-2xl border border-border/60 p-6 max-w-sm mx-4">
             <h3 className="text-lg font-semibold text-text-primary mb-2">기록 삭제</h3>
             <p className="text-text-secondary mb-6">
               이 기록을 삭제하시겠습니까? 삭제된 기록은 복구할 수 없습니다.
@@ -184,7 +184,7 @@ export default function RecordDetailPage() {
             <div className="flex gap-3">
               <button
                 onClick={() => setShowDeleteModal(false)}
-                className="flex-1 px-4 py-2 bg-dark-600 border border-border/75 text-text-secondary rounded-xl hover:bg-dark-800 transition-colors"
+                className="flex-1 px-4 py-2 bg-elevated border border-border/60 text-text-secondary rounded-xl hover:bg-page transition-colors"
               >
                 취소
               </button>
